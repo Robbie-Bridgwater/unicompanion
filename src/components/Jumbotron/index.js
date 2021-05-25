@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Jumbotron = ({height, padding, margin, children, customClass}) => {
+const Jumbotron = ({height, padding, margin, children, customClass}) => {
     // formatted {property}{sides}={breakpoint}-{size}
     // {size} for height varies from 0-100 and dictates what % of the parent element is taken up
     // {size} for padding & margin varies from 0-5 and dictates an rem value (0=0rem, 1=0.25rem, 5=3rem)
@@ -10,3 +10,5 @@ export const Jumbotron = ({height, padding, margin, children, customClass}) => {
         </div>
     )
 }
+
+export default Jumbotron;
