@@ -6,21 +6,23 @@ import Calendar from "./pages/calendar";
 import sportsAndSocieties from "./pages/sportsAndSocieties";
 import Account from "./pages/Account";
 
-import Navbar from "./components/NavBar";
+import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
-// import "./App.css";
-
 
 function App() {
   return (
     <Router>
       <div>
-        <Navbar/> 
+        <Sidebar />
         <Wrapper>
-        <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/calendar" component={Calendar} />
-          <Route exact path="/sportsAndSocieties" component={sportsAndSocieties} />
+          <Route
+            exact
+            path="/sportsAndSocieties"
+            component={sportsAndSocieties}
+          />
           <Route exact path="/Account" component={Account} />
           <Route exact path="/About" component={About} />
         </Wrapper>
