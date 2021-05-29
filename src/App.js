@@ -5,9 +5,7 @@ import Home from "./pages/home";
 import Calendar from "./pages/calendar";
 import sportsAndSocieties from "./pages/sportsAndSocieties";
 import Account from "./pages/Account";
-
 import Sidebar from "./components/Sidebar";
-import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 
 function App() {
@@ -26,7 +24,6 @@ function App() {
           <Route exact path="/Account" component={Account} />
           <Route exact path="/About" component={About} />
         </Wrapper>
-        <Footer />
       </div>
     </Router>
   );
