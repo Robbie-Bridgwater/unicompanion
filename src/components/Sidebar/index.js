@@ -17,6 +17,7 @@ const Sidebar = () => {
         height: "100vh",
         overflow: "scroll initial",
         zIndex: 10,
+        float: "left",
       }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
