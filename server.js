@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./routes");
+const routes = require("./routes/index.js");
 const app = express();
 const logger = require("morgan");
 
@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Using static path Public during development CHANGE TO BUILD ON DEPLOY
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/public"));
+  app.use(express.static("client/build"));
 }
 
 app.use(routes);
