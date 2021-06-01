@@ -14,33 +14,37 @@ export const Form = () => {
                                 size='xs-10 sm-8 md-6 lg-6'
                                 myclass='sportCol'
                             >
-                                <h4>Sports Teams</h4>
-                                <br></br>
-                                    {sports.map((data) => {
-                                        return (
-                                            <FormItem
-                                                key={ data.id }
-                                                type={ data.type }
-                                                description={ data.description }
-                                            />
-                                        )
-                                    })}
+                                <div>
+                                    <h4>Sports Teams</h4>
+                                    <br></br>
+                                        {sports.map((data) => {
+                                            return (
+                                                <FormItem
+                                                    key={ data.id }
+                                                    type={ data.type }
+                                                    description={ data.description }
+                                                />
+                                            )
+                                        })}
+                                </div>
                             </Col>
                             <Col 
                                 size='xs-10 sm-8 md-6 lg-6'
                                 myclass='socCol'
                             >
-                                <h4>Societies</h4>
-                                <br></br>
-                                    {societies.map((data) => {
-                                        return (
-                                            <FormItem
-                                                key={ data.id }
-                                                type={ data.type }
-                                                description={ data.description }
-                                            />
-                                        )
-                                    })}
+                                <div>
+                                    <h4>Societies</h4>
+                                    <br></br>
+                                        {societies.map((data) => {
+                                            return (
+                                                <FormItem
+                                                    key={ data.id }
+                                                    type={ data.type }
+                                                    description={ data.description }
+                                                />
+                                            )
+                                        })}
+                                </div>
                             </Col>
                         </form>
                 </Row>
