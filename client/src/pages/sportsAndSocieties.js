@@ -1,11 +1,17 @@
 import React from "react";
-import Form from "../components/Form";
 import Wrapper from "../components/Wrapper";
+import ParallaxImage from '../components/Parallax';
+import Form from "../components/Form";
+import '../App.css';
 
 const sportsAndSocieties = () => {
     return(
         <Wrapper>
-            <Form></Form>
+            <ParallaxImage />
+            <div className='snsHeader'>
+                <h1>Sports & Societies</h1>
+            </div>
+            <Form />
         </Wrapper>
     )
 }
