@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -6,72 +6,50 @@ import API from "../../utils/API";
 
 const localizer = momentLocalizer(moment)
 
-const myEventsList = []
-
-
 const ReactCalendar = () => {
 
-    // ================
-
-    const findEvents = () => {
-        API.getEvents()
-        .then(res => {
-                let events = res.data;
-                let myEventsList = []
-                for (let i = 0; i < events.length; i++) {
-                    myEventsList.push(events[i])
-                }
-                console.log(myEventsList)
-                return myEventsList
-
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
+    const [events, setEvents] = useState([]);
 
     // ================
 
-    // const getAllEvents = () => {
+    // useEffect(() => {
     //     API.getEvents()
-    //       .then(res => 
-    //         console.log(res.data))
-    //       .catch(err =>
-    //         console.log(err))
-    //   }
 
-    //   getAllEvents();
-
-    // ================
-
-
-    // const [events, setEvents] = useState([]);
-
-    // const findEvents = (query) => {
-    //     API.getEvents(query)
     //         .then(res => {
-
-    //             const eventData = res.data;
-    //             const eventsArr = [];
-
-    //             for (let item of eventData) {
-    //                 eventsArr.push(item);
+    //             let events = res.data;
+    //             let myEventsList = []
+    //             for (let i = 0; i < events.length; i++) {
+    //                 myEventsList.push(events[i])
     //             }
-    //             console.log(eventsArr);
-    //             setEvents(eventsArr);
+
+    //             setEvents(myEventsList);
+
+
     //         })
-    //         .catch(err => console.log(err));
-    // };
+
+    //         .catch(function (err) {
+    //             console.log(err);
+    //         });
+    // }, []);
 
     // ================
 
+    useEffect(() => {
+
+        API.getEvents()
+
+          .then(res => 
+            setEvents(res.data))
+
+          .catch(err => 
+            console.log(err))
+    }, []);
 
     return (
 
         <Calendar
             localizer={localizer}
-            events={findEvents()}
-            // events={function(){findEvents()}}
+            events={events}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
