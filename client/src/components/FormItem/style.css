@@ -1,0 +1,6 @@
+.formItem {
+    border: solid 3px black;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
