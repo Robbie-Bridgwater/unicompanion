@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from '../Grid';
 import FormItem from '../FormItem';
 import { sports, societies } from '../FormData';
-import './index.css';
+import './style.css';
 
 export const Form = () => {
     return (
@@ -23,6 +23,7 @@ export const Form = () => {
                                                     key={ data.id }
                                                     type={ data.type }
                                                     description={ data.description }
+                                                    email={ data.email }
                                                 />
                                             )
                                         })}
@@ -41,6 +42,7 @@ export const Form = () => {
                                                     key={ data.id }
                                                     type={ data.type }
                                                     description={ data.description }
+                                                    email={ data.email }
                                                 />
                                             )
                                         })}
