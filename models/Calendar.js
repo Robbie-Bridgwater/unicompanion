@@ -2,25 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CalendarSchema = new Schema({
-  event_id: { 
-    type: String, 
-    required: true 
+  title: {
+    type: String,
+    required: true
   },
-  occasion: { 
-    type: String, 
-    required: true 
+  allDay: {
+    type: Boolean,
+    required: true
   },
-  is_restricted: { 
-    type: Boolean, 
-    required: true 
+  start: {
+    type: Date,
+    required: true
   },
-  for_date: { 
-    type: Date, 
-    required: true 
-  },
-  color: { 
-    type: String, 
-    required: false 
+  end: {
+    type: Date,
+    required: true
   }
 });
 
