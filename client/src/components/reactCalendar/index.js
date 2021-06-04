@@ -48,15 +48,25 @@ const ReactCalendar = () => {
   // NEED HELP HERE
 
   const updateEvent = (clickedEvent) => {
-    const r = window.confirm("Would you like to update this event?")
-    if (r === true) {
+    const confirm = window.confirm("Would you like to update this event?")
+    if (confirm === true) {
 
       let updatePrompt = prompt("Please enter what you would like it updated to");
 
-      API.updateEvent({ _id: clickedEvent._id }, // FILTER
-        { _id: clickedEvent._id, title: updatePrompt, allDay: clickedEvent.allDay, start: clickedEvent.start, end: clickedEvent.end}) // UPDATE
+      API.updateEvent(
+        {
+          _id: clickedEvent._id // FILTER
+        },
 
-      .then(res =>
+        {
+          _id: clickedEvent._id, // UPDATE
+          title: updatePrompt,
+          allDay: clickedEvent.allDay,
+          start: clickedEvent.start,
+          end: clickedEvent.end
+        }
+
+      ).then(res =>
         getEvents())
 
         .catch(err => console.log(err));
@@ -65,7 +75,28 @@ const ReactCalendar = () => {
 
   // ==============
 
+  // Need to be able to add a specific time to event, currently allDay set to "true"
 
+  const addEvent = (clickedSlot) => {
+    const confirm = window.confirm("Would you like to add an event?")
+    if (confirm === true) {
+
+      let addPrompt = prompt("Please enter what you would like the event to be called.");
+
+      API.addEvent(
+        {
+          title: addPrompt,
+          allDay: true,
+          start: clickedSlot.start,
+          end: clickedSlot.end
+        }
+      ).then(res =>
+
+        getEvents())
+
+        .catch(err => console.log(err));
+    }
+  }
 
   return (
 
@@ -76,6 +107,8 @@ const ReactCalendar = () => {
       endAccessor="end"
       style={{ height: 500 }}
       onSelectEvent={event => updateEvent(event)}
+      onSelectSlot={event => addEvent(event)}
+      selectable={true}
     />
 
   )
