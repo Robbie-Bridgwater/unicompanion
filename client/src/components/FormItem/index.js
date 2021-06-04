@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import './style.css';
 
-const FormItem = (props) => {
+export const FormItem = (props) => {
     const [isChecked, setChecked] = useState(false);
     const handleChange = () => {
         setChecked(!isChecked);
