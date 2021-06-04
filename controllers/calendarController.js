@@ -20,7 +20,7 @@ module.exports = {
     },
 
     update: function(req, res) {
-        Calendar.findOneAndUpdate({ id: req.params.id }, req.body)
+        Calendar.updateOne({ _id: req.params.id }, req.body)
             .then(dbCalendar => res.json(dbCalendar))
             .catch(err => res.status(422).json(err));
     },

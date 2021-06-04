@@ -8,54 +8,77 @@ const localizer = momentLocalizer(moment)
 
 const ReactCalendar = () => {
 
-    const [events, setEvents] = useState([]);
-
-    // ================
-
-    // useEffect(() => {
-    //     API.getEvents()
-
-    //         .then(res => {
-    //             let events = res.data;
-    //             let myEventsList = []
-    //             for (let i = 0; i < events.length; i++) {
-    //                 myEventsList.push(events[i])
-    //             }
-
-    //             setEvents(myEventsList);
+  const [events, setEvents] = useState([]);
 
 
-    //         })
+  useEffect(() => {
 
-    //         .catch(function (err) {
-    //             console.log(err);
-    //         });
-    // }, []);
+    getEvents()
 
-    // ================
+  }, []);
 
-    useEffect(() => {
+  const getEvents = () => {
+    API.getEvents()
 
-        API.getEvents()
+      .then(res =>
+        setEvents(res.data))
 
-          .then(res => 
-            setEvents(res.data))
+      .catch(err =>
+        console.log(err))
+  }
 
-          .catch(err => 
-            console.log(err))
-    }, []);
+  const removeEvent = (clickedEvent) => {
 
-    return (
+    const r = window.confirm("Would you like to remove this event?")
+    if (r === true) {
 
-        <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 500 }}
-        />
+      API.deleteEvent(clickedEvent._id)
 
-    )
+        .then(res =>
+          getEvents())
+
+        .catch(err =>
+          console.log(err))
+
+    }
+  };
+
+  // ==============
+
+  // NEED HELP HERE
+
+  const updateEvent = (clickedEvent) => {
+    const r = window.confirm("Would you like to update this event?")
+    if (r === true) {
+
+      let updatePrompt = prompt("Please enter what you would like it updated to");
+
+      API.updateEvent({ _id: clickedEvent._id }, // FILTER
+        { _id: clickedEvent._id, title: updatePrompt, allDay: clickedEvent.allDay, start: clickedEvent.start, end: clickedEvent.end}) // UPDATE
+
+      .then(res =>
+        getEvents())
+
+        .catch(err => console.log(err));
+    }
+  }
+
+  // ==============
+
+
+
+  return (
+
+    <Calendar
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ height: 500 }}
+      onSelectEvent={event => updateEvent(event)}
+    />
+
+  )
 }
 
 export default ReactCalendar;
