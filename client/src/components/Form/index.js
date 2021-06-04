@@ -11,11 +11,11 @@ export const Form = () => {
                 <Row>
                         <form>
                             <Col
-                                size='xs-10 sm-8 md-6 lg-6'
-                                myclass='sportCol'
+                                size='xs-10 sm-10 md-6 lg-6'
+                                myclass='sportCol d-flex justify-content-center'
                             >
                                 <div>
-                                    <h4>Sports Teams</h4>
+                                    <h4 className='header'>Sports Teams</h4>
                                     <br></br>
                                         {sports.map((data) => {
                                             return (
@@ -30,11 +30,11 @@ export const Form = () => {
                                 </div>
                             </Col>
                             <Col 
-                                size='xs-10 sm-8 md-6 lg-6'
-                                myclass='socCol'
+                                size='xs-10 sm-10 md-6 lg-6'
+                                myclass='socCol d-flex justify-content-center'
                             >
                                 <div>
-                                    <h4>Societies</h4>
+                                    <h4 className='header'>Societies</h4>
                                     <br></br>
                                         {societies.map((data) => {
                                             return (
@@ -48,6 +48,17 @@ export const Form = () => {
                                         })}
                                 </div>
                             </Col>
+                            <br></br>
+                            <Row>
+                                <Col
+                                    size='xs-12 sm-12 md-12 lg-12'
+                                    myclass='d-flex justify-content-center'
+                                >
+                                    <div className='form-group'>
+                                        <button type='submit' className='btn btn-primary'>Submit</button>
+                                    </div>
+                                </Col>
+                            </Row>
                         </form>
                 </Row>
             </Container>
