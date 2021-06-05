@@ -18,6 +18,9 @@ const Sidebar = () => {
         overflow: "scroll initial",
         zIndex: 10,
         float: "left",
+        position: "sticky",
+        position: "-webkit-sticky",
+        top: 0,
       }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
