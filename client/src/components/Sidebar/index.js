@@ -19,7 +19,6 @@ const Sidebar = () => {
         zIndex: 10,
         float: "left",
         position: "sticky",
-        position: "-webkit-sticky",
         top: 0,
       }}
     >
