@@ -106,7 +106,7 @@ const ReactCalendar = () => {
       startAccessor="start"
       endAccessor="end"
       style={{ height: 500 }}
-      onSelectEvent={event => updateEvent(event)}
+      onSelectEvent={event => removeEvent(event)}
       onSelectSlot={event => addEvent(event)}
       selectable={true}
     />
