@@ -21,3 +21,14 @@ const Contact = () => {
                         <label for="exampleQuestion" className="form-label">Question</label>
                         <input type="text" className="form-control" id="exampleQuestion" />
                     </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+
+
+    )
+
+}
+
+export default Contact
