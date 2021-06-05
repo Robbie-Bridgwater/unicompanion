@@ -14,3 +14,18 @@ const About = (props) => {
                     <img src={Image1}
                     width ="100%" className="img=responsive"></img>
                     <Header title="About Us" />
+                   
+                   
+                    <p></p>
+                </div>
+                <div className="col-3">
+                    <ContactForm />
+                </div>
+            </div>
+
+
+        </Wrapper>
+    )
+}
+
+export default About
