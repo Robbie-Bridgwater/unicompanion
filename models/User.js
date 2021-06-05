@@ -28,12 +28,12 @@ const UserSchema = new Schema({
   sport: {
     type: String,
     enum: ['football', 'rugby', 'lacrosse', 'badminton', 'tennis'],
-    required : true 
+    required : false 
   },
   society: {
     type: String,
     enum: ['film', 'chess', 'music'],
-    required : true 
+    required : false 
   }
 });
 
