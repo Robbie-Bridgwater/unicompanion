@@ -17,3 +17,7 @@ const Contact = () => {
                         <label for="exampleEmail" className="form-label">Email Adresss</label>
                         <input type="text" className="form-control" id="exampleAddress" />
                     </div>
+                    <div className="mb-3">
+                        <label for="exampleQuestion" className="form-label">Question</label>
+                        <input type="text" className="form-control" id="exampleQuestion" />
+                    </div>
