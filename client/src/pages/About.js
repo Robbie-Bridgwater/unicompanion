@@ -2,7 +2,6 @@ import React from "react";
 import Wrapper from "../components/Wrapper";
 import ContactForm from "../components/ContactForm";
 import Header from "../components/Header";
-import Image1 from "../assets/img/birmingham_university.jpg";
 import ParallaxImage from '../components/Parallax';
 
 
@@ -11,6 +10,7 @@ const About = (props) => {
         
         <Wrapper>
             <ParallaxImage />
+            
             <div className="row">
                 <div className="col-8">
                     <Header title="About Us" />
