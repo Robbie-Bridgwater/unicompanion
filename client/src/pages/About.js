@@ -1,10 +1,5 @@
 import React from "react";
 import Wrapper from "../components/Wrapper";
-
-const About = () => {
-    return(
-        <Wrapper></Wrapper>
-    )
-}
-
-export default About
+import ContactForm from "../components/ContactForm";
+import Header from "../components/Header ";
+import Image1 from "../assets/img/birmingham_university.jpg";
