@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import userAPI from "../../utils/userAPI";
 
 function LoginForm({ Login, error }) {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    Login(details);
+    userAPI.authenticateUser(details).then(res => {
+      if(res.status === 200) {
+        userAPI.getSession().then(res => {
+          console.log(res);
+        })
+      }
+    })
+    setDetails({ email: '', password: '' });
   };
 
   return (
     <form onSubmit={submitHandler}>
       <div className="form-inner">
         <h2>Login</h2>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="name">Name: </label>
           <input
             type="text"
@@ -22,7 +29,7 @@ function LoginForm({ Login, error }) {
             onChange={(e) => setDetails({ ...details, name: e.target.value })}
             value={details.name}
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="email">Email: </label>
           <input
@@ -39,8 +46,7 @@ function LoginForm({ Login, error }) {
             type="password"
             name="password"
             id="password"
-            onChange={(e) =>
-              setDetails({ ...details, password: e.target.value })
+            onChange={(e) => setDetails({ ...details, password: e.target.value })
             }
             value={details.password}
           />

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import userAPI from "../../utils/userAPI";
 
 function SignUpForm({ Signup, error }) {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    Signup(details);
+    userAPI.createUser(details);
+    setDetails({ name: '', email: '', password: '' });
   };
 
   return (
@@ -14,7 +15,7 @@ function SignUpForm({ Signup, error }) {
       <div className="form-inner">
         <h2>Sign Up</h2>
         <div className="form-group">
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name">Full Name: </label>
           <input
             type="text"
             name="name"

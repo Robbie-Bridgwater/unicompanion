@@ -1,30 +1,33 @@
 const User = require("../models/User.js");
 
 module.exports = {
-  findAll: function(req, res) {
-    User.find(req.query)
-      .then(dbUser => res.json(dbUser))
-      .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    User.findById(req.params.id)
-      .then(dbUser => res.json(dbUser))
-      .catch(err => res.status(422).json(err));
-  },
   create: function(req, res) {
     User.create(req.body)
       .then(dbUser => res.json(dbUser))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
-    User.findOneAndUpdate({ id: req.params.id }, req.body)
-      .then(dbUser => res.json(dbUser))
-      .catch(err => res.status(422).json(err));
+  authenticate: function(req, res) {
+    User.findOne({ email: req.body.email, password: req.body.password }, function(err, user) {
+      if(err) {
+        console.log(err);
+        return res.status(500).send();
+      }
+
+      if(!user) {
+        return res.status(404).send('not found');
+      }
+
+      req.session.user = user;
+      return res.status(200).send('successfully logged in');
+    });
+
   },
-  remove: function(req, res) {
-    User.findById(req.params.id)
-      .then(dbUser => dbUser.remove())
-      .then(dbUser => res.json(dbUser))
-      .catch(err => res.status(422).json(err));
+  session: function(req, res) {
+    if(!req.session.user) {
+      return res.status(401).send();
+    }
+
+    return res.status(200).send("welcome to account");
+
   }
 };

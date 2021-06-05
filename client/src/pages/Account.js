@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Wrapper from "../components/Wrapper";
 import LoginForm from "../components/LoginForm";
+import SignupForm from "../components/SignupForm";
+import { Container, Row, Col } from "../components/Grid";
 import "./Account.css";
 
 const Account = () => {
@@ -31,23 +33,35 @@ const Account = () => {
     }
   };
 
-  // const Logout = () => {
-  //   setUser({ name: "", email: "" });
-  // };
+  const Logout = () => {
+    setUser({ name: "", email: "" });
+  };
 
   const reroute = () => {
     history.push("");
   };
 
+
   return (
     <Wrapper>
-      <div id="account">
-        {user.email !== "" ? (
-          reroute()
-        ) : (
-          <LoginForm Login={Login} error={error} />
-        )}
-      </div>
+      <Container>
+        <Row>
+          <Col size="5">
+            <div id="account">
+              {user.email !== "" ? (
+                reroute()
+              ) : (
+                <LoginForm Login={Login} error={error} />
+              )}
+            </div>
+          </Col>
+          <Col size="5">
+            <div id="account">
+              <SignupForm />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </Wrapper>
   );
 };
