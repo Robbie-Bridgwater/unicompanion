@@ -14,11 +14,11 @@ module.exports = {
       }
 
       if(!user) {
-        return res.status(404).send('not found');
+        return res.status(404).send('User not found');
       }
 
       req.session.user = user;
-      return res.status(200).send('successfully logged in');
+      return res.status(200).send('Successfully logged in');
     });
 
   },
@@ -27,7 +27,11 @@ module.exports = {
       return res.status(401).send();
     }
 
-    return res.status(200).send("welcome to account");
+    return res.status(200).send(req.session.user);
 
+  },
+  logout: function(req, res) {
+    req.session.destroy();
+    return res.status(200).send('Successfully ended session');
   }
 };

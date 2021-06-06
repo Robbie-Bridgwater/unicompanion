@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import userAPI from "../../utils/userAPI";
 
-function SignUpForm({ Signup, error }) {
+function SignUpForm(props) {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   const submitHandler = (e) => {
@@ -46,7 +46,6 @@ function SignUpForm({ Signup, error }) {
             value={details.password}
           />
         </div>
-        {error !== "" ? <div className="error">{error}</div> : ""}
         <br />
         <input type="submit" value="SIGNUP" />
       </div>

@@ -8,6 +8,9 @@ router.route("/")
 router.route("/login")
   .post(userController.authenticate);
 
+router.route("/logout")
+  .get(userController.logout);
+
 router.route("/account")
   .get(userController.session);
 
