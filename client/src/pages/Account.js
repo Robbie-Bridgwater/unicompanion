@@ -4,6 +4,7 @@ import LoginForm from "../components/LoginForm";
 import SignupForm from "../components/SignupForm";
 import { Container, Row, Col } from "../components/Grid";
 import userAPI from "../utils/userAPI";
+import UserAccount from "../components/UserAccount";
 import "./Account.css";
 
 const Account = () => {
@@ -33,7 +34,12 @@ const Account = () => {
   };
 
   if(loggedIn === true) {
-    return <div><h1>hi</h1></div>
+    return (
+      <div>
+
+        <UserAccount />
+      </div>
+    )
   }
   return (
     <Wrapper>
