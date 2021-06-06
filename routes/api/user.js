@@ -14,9 +14,9 @@ router.route("/logout")
 router.route("/account")
   .get(userController.session);
 
-// router.route("/:id")
-//   .get(userController.findById)
-//   .put(userController.update)
+router.route("/:id")
+  .get(userController.findUserById)
+  .put(userController.update)
 //   .delete(userController.remove);
 
 module.exports = router;

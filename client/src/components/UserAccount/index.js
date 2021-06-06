@@ -17,21 +17,19 @@ function UserAccount(props) {
   const currentPass = useRef();
   const newPass = useRef();
 
-
-  // useEffect(() => {
-  //   textInput.current.value = '';
-  // }, [passwordUpd])
-
-
-  // const handlePasswordUpd = () => {
-  //   // e.preventDefault();
-  //   setPasswordUpd(true);
-  // }
-
   const handleCurrentPassword = (e) => {
     e.preventDefault();
     currentPass.current.value = '';
-    userAPI.updatePassword(newPass.current.value);
+    const pass = newPass.current.value
+    const id = details._id;
+    console.log(pass, id)
+    userAPI.updatePassword({ id, pass })
+    newPass.current.value = '';
+  }
+
+  const handleLogout = () => {
+    userAPI.endSession();
+    window.location.reload();
   }
 
   return (
@@ -39,28 +37,27 @@ function UserAccount(props) {
       <Container>
         <Row>
           <Col size="10">
-          <div className="card border-dark mt-5 mb-3 w-50 mw-50" >
-            <div className="card-header">Account Details</div>
-            <div className="card-body text-dark">
-              <img className="mb-3" src={userImg} width="100px" height="100px"></img>
-              <p className="card-text"><strong>Full Name: {details.name}</strong></p>
-              <p className="card-text"><strong>Email Address: {details.email}</strong></p>
-              <h6>Update Password:</h6>
-                <div className="mt-4 mb-3">
-                  <label className="form-label">Current Password</label>
-                  <input type="text" className="form-control" ref={currentPass} />
-                </div>
-                <div className="mt-4 mb-3">
-                  <label className="form-label">New Password</label>
-                  <input type="password" className="form-control" ref={newPass} />
-                </div>
-                <button type="submit" onClick={handleCurrentPassword} className="btn btn-primary mt-2">Submit</button>
-
-
-
+            <div className="card border-dark mt-5 mb-3 w-50 mw-50" >
+              <div className="card-header inline">
+                <span>Account Management</span>
+                <button onClick={handleLogout} className="btn btn-info float-end">Logout?</button>
+              </div>
+              <div className="card-body text-dark">
+                <img className="mb-3 border" src={userImg} width="100px" height="100px"></img>
+                <p className="card-text"><strong>Full Name: {details.name}</strong></p>
+                <p className="card-text"><strong>Email Address: {details.email}</strong></p>
+                <h6>Update Password:</h6>
+                  <div className="mt-4 mb-3">
+                    <label className="form-label">Current Password:</label>
+                    <input type="text" className="form-control" ref={currentPass} />
+                  </div>
+                  <div className="mt-4 mb-3">
+                    <label className="form-label">New Password:</label>
+                    <input type="password" className="form-control" ref={newPass} />
+                  </div>
+                  <button type="submit" onClick={handleCurrentPassword} className="btn btn-primary mt-2">Submit</button>
+              </div>
             </div>
-          </div>
-
           </Col>
         </Row>
       </Container>

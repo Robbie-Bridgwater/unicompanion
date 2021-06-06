@@ -26,7 +26,9 @@ const Account = () => {
     userAPI.authenticateUser(details).then(res => {
       if(res.status === 200) {
         userAPI.getSession().then(res => {
-          console.log(res);
+          if(res.status === 200) {
+            setIsLoggedIn(true);
+          }
         })
       }
     })
@@ -36,7 +38,6 @@ const Account = () => {
   if(loggedIn === true) {
     return (
       <div>
-
         <UserAccount />
       </div>
     )
