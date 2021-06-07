@@ -1,16 +1,23 @@
 import axios from "axios";
 
 export default {
-  // GET all users
-  getAllUser: function() {
-    return axios.get('api/user');
+  createUser: function(credentials) {
+    return axios.post("/api/user", credentials);
   },
-  // GET a particular user
-  getUser: function(id) {
-    return axios.delete("api/user/" + id);
+
+  authenticateUser: function(credentials) {
+    return axios.post("/api/user/login", credentials);
   },
-  // Create a new user POST
-  saveUser: function(credentials) {
-    return axios.post("api/book", credentials);
+
+  getSession: function() {
+    return axios.get("/api/user/account");
+  },
+  
+  endSession: function() {
+    return axios.get("/api/user/logout");
+  },
+
+  updatePassword: function({ id, pass }) {
+    return axios.put(`/api/user/${id}`, {password: pass});
   }
 };

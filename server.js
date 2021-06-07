@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes/index.js");
 const app = express();
 const logger = require("morgan");
+const session = require("express-session");
 
 app.use(logger("dev"));
 
@@ -10,6 +11,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Using static path Public during development CHANGE TO BUILD ON DEPLOY
 if (process.env.NODE_ENV === "production") {

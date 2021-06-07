@@ -1,53 +1,69 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper";
 import LoginForm from "../components/LoginForm";
+import SignupForm from "../components/SignupForm";
+import { Container, Row, Col } from "../components/Grid";
+import userAPI from "../utils/userAPI";
+import UserAccount from "../components/UserAccount";
 import "./Account.css";
 
 const Account = () => {
-  const history = useHistory();
 
-  const adminUser = {
-    email: "admin@email.com",
-    password: "admin123",
+  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [loggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    userAPI.getSession().then(res => {
+      console.log(res);
+      if(res.status === 200) {
+        setIsLoggedIn(true);
+      }
+    })
+  }, [])
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    userAPI.authenticateUser(details).then(res => {
+      if(res.status === 200) {
+        userAPI.getSession().then(res => {
+          if(res.status === 200) {
+            setIsLoggedIn(true);
+          }
+        })
+      }
+    })
+    setDetails({ email: '', password: '' });
   };
 
-  const [user, setUser] = useState({ name: "", email: "" });
-  const [error, setError] = useState("");
-
-  const Login = (details) => {
-    console.log(details);
-
-    if (
-      details.email === adminUser.email &&
-      details.password === adminUser.password
-    ) {
-      setUser({
-        name: details.name,
-        email: details.email,
-      });
-    } else {
-      setError("Details do not match!");
-    }
-  };
-
-  // const Logout = () => {
-  //   setUser({ name: "", email: "" });
-  // };
-
-  const reroute = () => {
-    history.push("");
-  };
-
+  if(loggedIn === true) {
+    return (
+      <div>
+        <UserAccount />
+      </div>
+    )
+  }
   return (
     <Wrapper>
-      <div id="account">
-        {user.email !== "" ? (
-          reroute()
-        ) : (
-          <LoginForm Login={Login} error={error} />
-        )}
-      </div>
+      <Container>
+        <Row>
+          <Col size="5">
+            <div id="account">
+              <LoginForm 
+              onSubmit={submitHandler} 
+              onChangeEmail={(e) => setDetails({ ...details, email: e.target.value })}
+              onChangePass={(e) => setDetails({ ...details, password: e.target.value })}
+              valueEmail={details.email}
+              valuePass={details.password}
+              />
+            </div>
+          </Col>
+          <Col size="5">
+            <div id="account">
+              <SignupForm />
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </Wrapper>
   );
 };
