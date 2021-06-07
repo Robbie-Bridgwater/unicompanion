@@ -7,6 +7,7 @@ const ParallaxImage = () => {
 
     return (
             <Parallax
+                
                 bgImage={backgroundImage}
                 bgImageAlt="Parallax Image"
                 strength={-125}
