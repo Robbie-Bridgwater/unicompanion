@@ -10,12 +10,9 @@ export default {
         return axios.delete("/api/calendar/" + id);
     },
     // UPDATE EVENT BY MONGO ID
-    updateEvent: function(id) {
-        return axios.put("/api/calendar/" + id);
+    updateEvent: function(id, eventData) {
+        return axios.put("/api/calendar/" + id, eventData);
     },
-    // updateEvent: function(id, eventData) {
-    //     return axios.put("/api/calendar/" + id, eventData);
-    // },
     // ADD EVENT
     addEvent: function(eventData) {
         return axios.post("api/calendar/", eventData);

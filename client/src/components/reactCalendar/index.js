@@ -3,12 +3,41 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import API from "../../utils/API";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import CalendarModal from "../CalendarModal";
 
 const localizer = momentLocalizer(moment)
 
 const ReactCalendar = () => {
-
+  // CALENDAR HOOKS
   const [events, setEvents] = useState([]);
+  const [storedClickedEvent, storeClickedEvent] = useState([]);
+
+  // MODAL HOOKS AND FUNCTIONS
+  const [showEventModal, setEventModal] = useState(false);
+  const [showSlotModal, setSlotModal] = useState(false);
+
+  // Update and delete modal
+  const handleEventClose = () => {
+    setEventModal(false);
+  }
+
+  const handleEventShow = (clickedEvent) => {
+    setEventModal(true);
+    storeClickedEvent(clickedEvent)
+  }
+
+  // add event modal
+  const handleSlotClose = () => {
+    setSlotModal(false);
+  }
+
+  const handleSlotShow = (clickedEvent) => {
+    setSlotModal(true);
+    storeClickedEvent(clickedEvent)
+  }
 
 
   useEffect(() => {
@@ -27,90 +56,141 @@ const ReactCalendar = () => {
         console.log(err))
   }
 
-  const removeEvent = (clickedEvent) => {
+  const removeEvent = () => {
 
-    const r = window.confirm("Would you like to remove this event?")
-    if (r === true) {
+    API.deleteEvent(storedClickedEvent._id)
 
-      API.deleteEvent(clickedEvent._id)
+      .then(res =>
+        getEvents(),
+        handleEventClose()
 
-        .then(res =>
-          getEvents())
+      ).catch(err =>
+        console.log(err))
 
-        .catch(err =>
-          console.log(err))
-
-    }
   };
 
-  // ==============
+  const updateEvent = () => {
+    // const confirm = window.confirm("Would you like to update this event?")
+    // if (confirm === true) {
 
-  // NEED HELP HERE
+    let updatePrompt = prompt("Please enter what you would like it updated to");
 
-  const updateEvent = (clickedEvent) => {
-    const confirm = window.confirm("Would you like to update this event?")
-    if (confirm === true) {
+    API.updateEvent(
 
-      let updatePrompt = prompt("Please enter what you would like it updated to");
+      storedClickedEvent._id // FILTER
+      ,
 
-      API.updateEvent(
-        {
-          _id: clickedEvent._id // FILTER
-        },
+      {
+        _id: storedClickedEvent._id, // UPDATE
+        title: updatePrompt,
+        allDay: storedClickedEvent.allDay,
+        start: storedClickedEvent.start,
+        end: storedClickedEvent.end
+      }
 
-        {
-          _id: clickedEvent._id, // UPDATE
-          title: updatePrompt,
-          allDay: clickedEvent.allDay,
-          start: clickedEvent.start,
-          end: clickedEvent.end
-        }
+    ).then(res =>
+      getEvents(),
+      handleEventClose()
 
-      ).then(res =>
-        getEvents())
-
-        .catch(err => console.log(err));
-    }
+    ).catch(err => console.log(err));
+    // }
   }
-
-  // ==============
 
   // Need to be able to add a specific time to event, currently allDay set to "true"
 
   const addEvent = (clickedSlot) => {
-    const confirm = window.confirm("Would you like to add an event?")
-    if (confirm === true) {
 
-      let addPrompt = prompt("Please enter what you would like the event to be called.");
+    // const confirm = window.confirm("Would you like to update this event?")
+    // if (confirm === true) {
 
-      API.addEvent(
-        {
-          title: addPrompt,
-          allDay: true,
-          start: clickedSlot.start,
-          end: clickedSlot.end
-        }
-      ).then(res =>
+    let addPrompt = prompt("Please enter what you would like the event to be called.");
 
-        getEvents())
+    API.addEvent(
+      {
+        title: addPrompt,
+        allDay: true,
+        start: clickedSlot.start,
+        end: clickedSlot.end
+      }
+    ).then(res =>
 
-        .catch(err => console.log(err));
-    }
+      getEvents())
+
+      .catch(err => console.log(err));
+    // }
   }
 
   return (
+    <>
 
-    <Calendar
-      localizer={localizer}
-      events={events}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-      onSelectEvent={event => removeEvent(event)}
-      onSelectSlot={event => addEvent(event)}
-      selectable={true}
-    />
+      {/* MODAL */}
 
+      {/* =========== under development */}
+
+      {/* <CalendarModal Title="Edit Event" Body="Would you like to delete or update the selected Event?">
+      <Button id="deleteButton" variant="danger" onClick={removeEvent}>
+            Delete Event
+            </Button>
+          <Button variant="primary" onClick={updateEvent}>
+            Update Event
+          </Button>
+      </CalendarModal> */}
+
+      {/* ===========  */}
+
+
+      <Modal show={showEventModal} onHide={handleEventClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Would you like to delete or update the selected event?</Modal.Body>
+        <Modal.Footer>
+          <Button id="deleteButton" variant="danger" onClick={removeEvent}>
+            Delete Event
+            </Button>
+          <Button variant="primary" onClick={updateEvent}>
+            Update Event
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* ========================= */}
+
+
+      <Modal show={showSlotModal} onHide={handleSlotClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Would you like to add the event on the selected day?</Modal.Body>
+        <Form>
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control type="text" name="myInput" placeholder="Enter event name" />
+        </Form>
+        <Modal.Footer>
+          <Button id="deleteButton" variant="danger" onClick={addEvent}>
+            Add
+          </Button>
+          <Button variant="primary" onClick={handleSlotClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* CALENDAR */}
+
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
+        onSelectEvent={event => handleEventShow(event)}
+        onSelectSlot={event => handleSlotShow(event)}
+        selectable={true}
+      // popup={true}
+      />
+
+    </>
   )
 }
 
