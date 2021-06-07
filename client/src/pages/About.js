@@ -16,7 +16,7 @@ const About = (props) => {
                     <Header title="About Us" />
                      <p></p>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                     <ContactForm />
                 </div>
             </div>
