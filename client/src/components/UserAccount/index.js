@@ -9,7 +9,6 @@ function UserAccount(props) {
 
   useEffect(() => {
     userAPI.getSession().then(res => {
-      console.log(res);
       setDetails(res.data)
     })
   }, [])
@@ -22,7 +21,6 @@ function UserAccount(props) {
     currentPass.current.value = '';
     const pass = newPass.current.value
     const id = details._id;
-    console.log(pass, id)
     userAPI.updatePassword({ id, pass })
     newPass.current.value = '';
   }
