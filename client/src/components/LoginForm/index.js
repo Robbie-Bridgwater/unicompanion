@@ -13,6 +13,7 @@ function LoginForm(props) {
             id="name"
             onChange={(e) => setDetails({ ...details, name: e.target.value })}
             value={details.name}
+            className="auth-input"
           />
         </div> */}
         <div className="form-group">
@@ -23,6 +24,7 @@ function LoginForm(props) {
             id="email"
             onChange={props.onChangeEmail}
             value={props.valueEmail}
+            className="auth-input"
           />
         </div>
         <div className="form-group">
@@ -33,10 +35,11 @@ function LoginForm(props) {
             id="password"
             onChange={props.onChangePass}
             value={props.valuePass}
+            className="auth-input"
           />
         </div>
         <br />
-        <input type="submit" value="LOGIN" />
+        <input type="submit" value="LOGIN" className="auth-input" />
       </div>
     </form>
   );

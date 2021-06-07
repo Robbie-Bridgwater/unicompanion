@@ -9,8 +9,7 @@
   /* background-color: #53565a; */
 }
 
-input,
-button {
+.auth-input {
   appearance: none;
   background: none;
   border: none;
