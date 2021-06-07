@@ -4,18 +4,18 @@ import Modal from 'react-bootstrap/Modal';
 
 
 const CalendarModal = (props) => {
-  // const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-        </Button> */}
+        </Button>
 
-      <Modal>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.Title}</Modal.Title>
         </Modal.Header>
