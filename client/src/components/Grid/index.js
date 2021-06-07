@@ -8,13 +8,13 @@ export function Row({ fluid, children, myclass }) {
   return <div className={`row${fluid ? "-fluid" : ""} ${myclass}`}>{children}</div>;
 }
 
-export function Col({ size, children }) {
+export function Col({ size, children, myclass }) {
   return (
     <div
       className={size
         .split(" ")
         .map(size => "col-" + size)
-        .join(" ")}
+        .join(" ") + ` ${myclass}`}
     >
       {children}
     </div>
