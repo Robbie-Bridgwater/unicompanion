@@ -7,11 +7,11 @@ function SignUpForm(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     userAPI.createUser(details);
-    setDetails({ name: '', email: '', password: '' });
+    setDetails({ name: "", email: "", password: "" });
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="auth-form">
       <div className="form-inner">
         <h2>Sign Up</h2>
         <div className="form-group">

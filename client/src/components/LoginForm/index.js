@@ -1,9 +1,8 @@
 import React from "react";
 
 function LoginForm(props) {
-
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.onSubmit} className="auth-form">
       <div className="form-inner">
         <h2>Login</h2>
         {/* <div className="form-group">
