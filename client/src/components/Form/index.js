@@ -30,59 +30,59 @@ export const Form = () => {
         }
     );
 
-    // const handleChange = (e) => {
-    //     let sportsObj = isSports;
-    //     let societiesObj = isSocieties;
-    //     // sportsObj.Football = !sportsObj.Football
-    //     // setSports(sportsObj)
+    const handleChange = (e) => {
+        let sportsObj = isSports;
+        let societiesObj = isSocieties;
+        // sportsObj.Football = !sportsObj.Football
+        // setSports(sportsObj)
 
-    //     // Take the name from the input - name of society/team
-    //     const name = e.target.value;
+        // Take the name from the input - name of society/team
+        const name = e.target.value;
 
-    //     switch(name){
-    //         case 'Football':
-    //             sportsObj.Football = !sportsObj.Football
-    //             setSports(sportsObj)
-    //             break;
-    //         case 'Hockey':
-    //             sportsObj.Hockey = !sportsObj.Hockey
-    //             setSports(sportsObj)
-    //             break;
-    //         case 'Rugby':
-    //             sportsObj.Rugby = !sportsObj.Rugby
-    //             setSports(sportsObj)
-    //             break;    
-    //         case 'Lacrosse':
-    //             sportsObj.Lacrosse = !sportsObj.Lacrosse
-    //             setSports(sportsObj)
-    //             break; 
-    //         case 'Film':
-    //             societiesObj.Film = !societiesObj.Film
-    //             setSocieties(societiesObj)
-    //             break;
-    //         case 'Dance':
-    //             societiesObj.Dance = !societiesObj.Dance
-    //             setSocieties(societiesObj)
-    //             break;
-    //         case 'Music':
-    //             societiesObj.Music = !societiesObj.Music
-    //             setSocieties(societiesObj)
-    //             break;
-    //         case 'Drinking':
-    //             societiesObj.Drinking = !societiesObj.Drinking
-    //             setSocieties(societiesObj)
-    //             break;
-    //         default:
-    //             console.log(new Error());
-    //             break;
-    //     }
-    // }
+        switch(name){
+            case 'Football':
+                sportsObj.Football = !sportsObj.Football
+                setSports(sportsObj)
+                break;
+            case 'Hockey':
+                sportsObj.Hockey = !sportsObj.Hockey
+                setSports(sportsObj)
+                break;
+            case 'Rugby':
+                sportsObj.Rugby = !sportsObj.Rugby
+                setSports(sportsObj)
+                break;    
+            case 'Lacrosse':
+                sportsObj.Lacrosse = !sportsObj.Lacrosse
+                setSports(sportsObj)
+                break; 
+            case 'Film':
+                societiesObj.Film = !societiesObj.Film
+                setSocieties(societiesObj)
+                break;
+            case 'Dance':
+                societiesObj.Dance = !societiesObj.Dance
+                setSocieties(societiesObj)
+                break;
+            case 'Music':
+                societiesObj.Music = !societiesObj.Music
+                setSocieties(societiesObj)
+                break;
+            case 'Drinking':
+                societiesObj.Drinking = !societiesObj.Drinking
+                setSocieties(societiesObj)
+                break;
+            default:
+                console.log(new Error());
+                break;
+        }
+    }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     console.log(isSports);
-    //     console.log(isSocieties);
-    // }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(isSports);
+        console.log(isSocieties);
+    }
 
     return (
         <li className='list-group-item'>
