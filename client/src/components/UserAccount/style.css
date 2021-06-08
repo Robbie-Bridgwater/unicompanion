@@ -1,0 +1,51 @@
+.account-card {
+  display: block;
+  position: relative;
+}
+
+.account-card:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: 1;
+  background-image: linear-gradient(to bottom right, #0cbaba, #f92a82);
+}
+
+.account-card .card-inner {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  padding: 30px;
+  z-index: 2;
+}
+
+.account-card button {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.account-card button:hover {
+  background-position: 100% 0%;
+}
+
+.account-header {
+  height: 60px;
+}
