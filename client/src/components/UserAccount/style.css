@@ -49,3 +49,15 @@
 .account-header {
   height: 60px;
 }
+
+.pw-form-group label {
+  display: block;
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 5px;
+  transition: 0.4s;
+}
+
+.pw-form-group:focus-within label {
+  color: #f92a82;
+}

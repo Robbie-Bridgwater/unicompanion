@@ -61,7 +61,7 @@ function UserAccount(props) {
                     <strong>Email Address: {details.email}</strong>
                   </p>
                   <h6>Update Password:</h6>
-                  <div className="mt-4 mb-3">
+                  <div className="mt-4 mb-3 pw-form-group">
                     <label className="form-label">Current Password:</label>
                     <input
                       type="text"
@@ -69,7 +69,7 @@ function UserAccount(props) {
                       ref={currentPass}
                     />
                   </div>
-                  <div className="mt-4 mb-3">
+                  <div className="mt-4 mb-3 pw-form-group">
                     <label className="form-label">New Password:</label>
                     <input
                       type="password"
