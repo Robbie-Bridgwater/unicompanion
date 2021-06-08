@@ -31,3 +31,26 @@
   z-index: 2;
   margin-bottom: 20px;
 }
+
+.sns-submit-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sns-submit-btn:hover {
+  background-position: 100% 0%;
+}
