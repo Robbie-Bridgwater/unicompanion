@@ -10,11 +10,10 @@ const About = (props) => {
       <ParallaxImage />
 
       <div className="row">
-        <div className="col-8">
+        <div className="col-md-8 p-3">
           <AboutUs title="About Us" />
-          <p></p>
         </div>
-        <div className="col-4">
+        <div className="col-md-4 p-3">
           <ContactForm />
         </div>
       </div>
