@@ -54,6 +54,8 @@ const ReactCalendar = () => {
 
   }, []);
 
+  // ADD/DELETE/UPDATE FUNCTIONS
+
   const getEvents = () => {
     API.getEvents()
 
@@ -196,7 +198,7 @@ const ReactCalendar = () => {
         onSelectEvent={event => handleEventShow(event)}
         onSelectSlot={event => handleSlotShow(event)}
         selectable={true}
-      // popup={true}
+        popup={true}
       />
 
     </>
