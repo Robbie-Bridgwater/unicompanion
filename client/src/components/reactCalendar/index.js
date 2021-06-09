@@ -26,7 +26,7 @@ const ReactCalendar = () => {
   const [inputEndTimeMinutes, setInputEndTimeMinutes] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
 
-  // UPDATE/DELETE MODAL
+  // UPDATE/DELETE MODAL FUNCTIONS
 
   const handleEventClose = () => {
     setEventModal(false);
@@ -37,7 +37,7 @@ const ReactCalendar = () => {
     storeClickedEvent(clickedEvent)
   }
 
-  // ADD EVENT MODAL
+  // ADD EVENT MODAL FUNCTIONS
   const handleSlotClose = () => {
     setSlotModal(false);
   }
@@ -101,7 +101,6 @@ const ReactCalendar = () => {
     ).catch(err => console.log(err));
 
   }
-
 
   const inputTimeConverter = (inputHours, inputMinutes) => {
     let year = storedClickedEvent.start.getFullYear();
