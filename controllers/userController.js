@@ -2,9 +2,25 @@ const User = require("../models/User.js");
 
 module.exports = {
     findUserById: function(req, res) {
-        User.findById(req.params.id)
-            .then(dbUser => res.json(dbUser))
+        console.log(req.params.id)
+        console.log(req.session.user._id)
+        if (req.params.id === req.session.user._id) {
+            User.findById(req.params.id)
+            .then(
+                dbUser => res.json(dbUser)
+                )
             .catch(err => res.status(422).json(err));
+        } else {
+            return res.status(401).send();
+        }
+        
+        
+
+            // if (!req.session.user) {
+            //     return res.status(401).send();
+            // }
+    
+            // return res.status(200).send(req.session.user);
     },
 
     create: function(req, res) {
@@ -48,4 +64,12 @@ module.exports = {
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
+
+    socials: function(req, res) {
+        console.log(req.body);
+        console.log('here');
+        User.findOneAndUpdate({_id: req.params.id}, {sport: req.body.sport, society: req.body.society})
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+    }
 };
