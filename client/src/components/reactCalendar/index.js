@@ -98,7 +98,7 @@ const ReactCalendar = () => {
 
   // Need to be able to add a specific time to event, currently allDay set to "true"
 
-  const addEvent = (clickedSlot) => {
+  const addEvent = () => {
 
     // const confirm = window.confirm("Would you like to update this event?")
     // if (confirm === true) {
@@ -109,8 +109,8 @@ const ReactCalendar = () => {
       {
         title: addPrompt,
         allDay: true,
-        start: clickedSlot.start,
-        end: clickedSlot.end
+        start: storedClickedEvent.start,
+        end: storedClickedEvent.end
       }
     ).then(res =>
 
