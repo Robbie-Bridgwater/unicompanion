@@ -8,8 +8,9 @@ import UserAccount from "../components/UserAccount";
 import "./Account.css";
 
 const Account = () => {
-  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [details, setDetails] = useState({ email: "", password: "" });
   const [loggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
@@ -41,6 +42,7 @@ const Account = () => {
       </div>
     );
   }
+
   return (
     <Wrapper>
       <Container>
@@ -57,6 +59,7 @@ const Account = () => {
                 }
                 valueEmail={details.email}
                 valuePass={details.password}
+                error={error}
               />
             </div>
           </Col>
