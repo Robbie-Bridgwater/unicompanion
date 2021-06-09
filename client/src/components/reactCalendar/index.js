@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 const localizer = momentLocalizer(moment)
 
 const ReactCalendar = () => {
+
   // CALENDAR HOOKS
   const [events, setEvents] = useState([]);
   const [storedClickedEvent, storeClickedEvent] = useState("");
@@ -100,9 +101,9 @@ const ReactCalendar = () => {
       {
         _id: storedClickedEvent._id, // UPDATE
         title: inputTitle,
-        allDay: storedClickedEvent.allDay,
         start: storedClickedEvent.start,
-        end: storedClickedEvent.end
+        end: storedClickedEvent.end,
+        allDay: storedClickedEvent.allDay
       }
 
     ).then(res =>
@@ -137,9 +138,9 @@ const ReactCalendar = () => {
     API.addEvent(
       {
         title: inputTitle,
-        allDay: switchStatus,
         start: inputTimeConverter(inputStartTime),
-        end: inputTimeConverter(inputEndTime)
+        end: inputTimeConverter(inputEndTime),
+        allDay: switchStatus
       }
     ).then(res =>
 
@@ -224,7 +225,8 @@ const ReactCalendar = () => {
         onSelectSlot={event => handleSlotShow(event)}
         selectable={true}
         popup={true}
-      />
+        views={["month", "agenda"]}
+        />
 
     </>
   )
