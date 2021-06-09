@@ -162,10 +162,10 @@ const ReactCalendar = () => {
         <Modal.Body>Enter what you would like to update the name of the event to</Modal.Body>
         <Form onSubmit={updateEvent}>
         <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
-          <Button type="submit" id="deleteButton" variant="danger">
+          <Button type="submit" id="deleteButton" variant="primary">
             Update
           </Button>
-          <Button variant="primary" onClick={handleSlotClose}>
+          <Button variant="danger" onClick={handleSlotClose}>
             Cancel
           </Button>
         </Form>
@@ -204,10 +204,10 @@ const ReactCalendar = () => {
           <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time" />
           <Form.Label>Enter event end time</Form.Label>
           <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
-          <Button type="submit" id="deleteButton" variant="danger">
+          <Button type="submit" id="deleteButton" variant="primary">
             Add
           </Button>
-          <Button variant="primary" onClick={handleSlotClose}>
+          <Button variant="danger" onClick={handleSlotClose}>
             Cancel
           </Button>
         </Form>
