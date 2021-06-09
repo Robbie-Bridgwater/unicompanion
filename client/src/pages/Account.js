@@ -38,7 +38,7 @@ const Account = () => {
     e.preventDefault();
     userAPI.createUser(signupDetails)
     .then(res => {
-      setDetails(res.data)
+      setDetails(res.data);
       userAPI.authenticateUser(signupDetails).then(res => {
         if(res.status === 200) {
           userAPI.getSession().then(res => {
