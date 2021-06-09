@@ -20,10 +20,9 @@ const ReactCalendar = () => {
 
   // FORM HOOKS
   const [inputTitle, setInputTitle] = useState([]);
-  const [inputStartTimeHours, setInputStartTimeHours] = useState([]);
-  const [inputStartTimeMinutes, setInputStartTimeMinutes] = useState([]);
-  const [inputEndTimeHours, setInputEndTimeHours] = useState([]);
-  const [inputEndTimeMinutes, setInputEndTimeMinutes] = useState([]);
+  const [inputStartTime, setInputStartTime] = useState([]);
+  const [inputEndTime, setInputEndTime] = useState([]);
+  const [test, setTest] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
 
   // UPDATE/DELETE MODAL FUNCTIONS
@@ -104,15 +103,14 @@ const ReactCalendar = () => {
 
   }
 
-  const inputTimeConverter = (inputHours, inputMinutes) => {
+  const inputTimeConverter = (inputTime) => {
     let year = storedClickedEvent.start.getFullYear();
     let month = storedClickedEvent.start.getMonth() + 1;
     let day = storedClickedEvent.start.getDate();
-    let hour = inputHours;
-    let minutes = inputMinutes;
+    let hoursAndMinutes = inputTime;
     let seconds = '00';
     let milliseconds = '00';
-    let convertedTime = new Date(`${year}-${month}-${day} ${hour}:${minutes}:${seconds}:${milliseconds}`)
+    let convertedTime = new Date(`${year}-${month}-${day} ${hoursAndMinutes}:${seconds}:${milliseconds}`)
     return convertedTime
   }
 
@@ -120,20 +118,16 @@ const ReactCalendar = () => {
     event.preventDefault()
     setInputTitle(inputTitle)
 
-    setInputStartTimeHours(inputStartTimeHours)
-    setInputStartTimeMinutes(inputStartTimeMinutes)
+    setInputStartTime(inputStartTime)
 
-    setInputEndTimeHours(inputEndTimeHours)
-    setInputEndTimeMinutes(inputEndTimeMinutes)
-
-    console.log(switchStatus)
+    setInputEndTime(inputEndTime)
 
     API.addEvent(
       {
         title: inputTitle,
         allDay: switchStatus,
-        start: inputTimeConverter(inputStartTimeHours, inputStartTimeMinutes),
-        end: inputTimeConverter(inputEndTimeHours, inputEndTimeMinutes)
+        start: inputTimeConverter(inputStartTime),
+        end: inputTimeConverter(inputEndTime)
       }
     ).then(res =>
 
@@ -174,10 +168,10 @@ const ReactCalendar = () => {
           <Form.Label>Event Name</Form.Label>
           <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
           <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
-          <Form.Control onChange={event => setInputStartTimeHours(event.target.value)} type="text" placeholder="Enter event start time hours" />
-          <Form.Control onChange={event => setInputStartTimeMinutes(event.target.value)} type="text" placeholder="Enter event start time minutes" />
-          <Form.Control onChange={event => setInputEndTimeHours(event.target.value)} type="text" placeholder="Enter event end time hours" />
-          <Form.Control onChange={event => setInputEndTimeMinutes(event.target.value)} type="text" placeholder="Enter event end time minutes" />
+          <Form.Label>Enter event start time</Form.Label>
+          <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time"/>
+          <Form.Label>Enter event end time</Form.Label>
+          <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
           <Button type="submit" id="deleteButton" variant="danger">
             Add
           </Button>
