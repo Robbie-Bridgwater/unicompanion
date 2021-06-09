@@ -9,7 +9,10 @@ function UserAccount(props) {
 
   useEffect(() => {
     userAPI.getSession().then(res => {
-      setDetails(res.data)
+      setDetails(res.data);
+      // if(details.is_SuperUser === true {
+      //   // render superuser component here...
+      // })
     })
   }, [])
 
