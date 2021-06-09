@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const CalendarModal = (props) => {
   const [show, setShow] = useState(false);
@@ -13,21 +12,17 @@ const CalendarModal = (props) => {
     <>
       <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-        </Button>
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.Title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {props.Body}
-        </Modal.Body>
-        <Modal.Footer>
-          {props.children}
-        </Modal.Footer>
+        <Modal.Body>{props.Body}</Modal.Body>
+        <Modal.Footer>{props.children}</Modal.Footer>
       </Modal>
     </>
   );
-}
+};
 
 export default CalendarModal;

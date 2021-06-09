@@ -13,11 +13,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //use sessions for tracking logins
-app.use(session({
-  secret: 'work hard',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "work hard",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // Using static path Public during development CHANGE TO BUILD ON DEPLOY
 if (process.env.NODE_ENV === "production") {
@@ -36,7 +38,4 @@ mongoose.connect(
   }
 );
 
-app.listen(PORT, () =>
-  console.log(`Server now listening on PORT ${PORT}!`)
-);
-
+app.listen(PORT, () => console.log(`Server now listening on PORT ${PORT}!`));

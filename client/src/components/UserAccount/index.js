@@ -11,13 +11,11 @@ function UserAccount(props) {
   useEffect(() => {
     userAPI.getSession().then((res) => {
       console.log(res);
-      userAPI.getUser(res.data._id).then(
-        payload => {
-          setDetails(payload.data)
-        }
-      )
-    })
-  }, [])
+      userAPI.getUser(res.data._id).then((payload) => {
+        setDetails(payload.data);
+      });
+    });
+  }, []);
 
   const currentPass = useRef();
   const newPass = useRef();
@@ -99,21 +97,22 @@ function UserAccount(props) {
           </Col>
 
           <Col size="10">
-              <div className="card border-drk mt-5 mb-3 w-50 mw-50">
-                <div className="card-header inline">
-                  <span>Sports & Societies</span>
-                </div>
-                <div className="card-body text-dark">
-                  <p className="card-text"><strong>Sports: </strong>
-                  {details.sport}
-                  </p>
-                  <p className="card-text"><strong>Societies: </strong>
-                  {details.society}
-                  </p>
-                </div>
+            <div className="card border-drk mt-5 mb-3 w-50 mw-50">
+              <div className="card-header inline">
+                <span>Sports & Societies</span>
               </div>
-            </Col>
-
+              <div className="card-body text-dark">
+                <p className="card-text">
+                  <strong>Sports: </strong>
+                  {details.sport}
+                </p>
+                <p className="card-text">
+                  <strong>Societies: </strong>
+                  {details.society}
+                </p>
+              </div>
+            </div>
+          </Col>
         </Row>
       </Container>
     </Wrapper>
