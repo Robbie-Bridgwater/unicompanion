@@ -8,39 +8,38 @@ import UserAccount from "../components/UserAccount";
 import "./Account.css";
 
 const Account = () => {
-
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
   const [loggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    userAPI.getSession().then(res => {
+    userAPI.getSession().then((res) => {
       console.log(res);
-      if(res.status === 200) {
+      if (res.status === 200) {
         setIsLoggedIn(true);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    userAPI.authenticateUser(details).then(res => {
-      if(res.status === 200) {
-        userAPI.getSession().then(res => {
-          if(res.status === 200) {
+    userAPI.authenticateUser(details).then((res) => {
+      if (res.status === 200) {
+        userAPI.getSession().then((res) => {
+          if (res.status === 200) {
             setIsLoggedIn(true);
           }
-        })
+        });
       }
-    })
-    setDetails({ email: '', password: '' });
+    });
+    setDetails({ email: "", password: "" });
   };
 
-  if(loggedIn === true) {
+  if (loggedIn === true) {
     return (
       <div>
         <UserAccount />
       </div>
-    )
+    );
   }
   return (
     <Wrapper>
@@ -48,12 +47,16 @@ const Account = () => {
         <Row>
           <Col size="5">
             <div id="account">
-              <LoginForm 
-              onSubmit={submitHandler} 
-              onChangeEmail={(e) => setDetails({ ...details, email: e.target.value })}
-              onChangePass={(e) => setDetails({ ...details, password: e.target.value })}
-              valueEmail={details.email}
-              valuePass={details.password}
+              <LoginForm
+                onSubmit={submitHandler}
+                onChangeEmail={(e) =>
+                  setDetails({ ...details, email: e.target.value })
+                }
+                onChangePass={(e) =>
+                  setDetails({ ...details, password: e.target.value })
+                }
+                valueEmail={details.email}
+                valuePass={details.password}
               />
             </div>
           </Col>
