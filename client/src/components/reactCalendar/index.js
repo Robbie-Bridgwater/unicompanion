@@ -13,13 +13,17 @@ const localizer = momentLocalizer(moment)
 const ReactCalendar = () => {
   // CALENDAR HOOKS
   const [events, setEvents] = useState([]);
-  const [storedClickedEvent, storeClickedEvent] = useState([]);
+  const [storedClickedEvent, storeClickedEvent] = useState("");
 
   // MODAL HOOKS AND FUNCTIONS
   const [showEventModal, setEventModal] = useState(false);
   const [showSlotModal, setSlotModal] = useState(false);
 
-  // Update and delete modal
+  // FORM HOOKS
+  const [inputValue, setInputValue] = useState([]);
+
+
+  // The Modal which presents the update and delete options
   const handleEventClose = () => {
     setEventModal(false);
   }
@@ -29,7 +33,7 @@ const ReactCalendar = () => {
     storeClickedEvent(clickedEvent)
   }
 
-  // add event modal
+  // The Modal which allows you to add event
   const handleSlotClose = () => {
     setSlotModal(false);
   }
@@ -98,7 +102,7 @@ const ReactCalendar = () => {
 
   // Need to be able to add a specific time to event, currently allDay set to "true"
 
-  const addEvent = (clickedSlot) => {
+  const addEvent = () => {
 
     // const confirm = window.confirm("Would you like to update this event?")
     // if (confirm === true) {
@@ -109,8 +113,8 @@ const ReactCalendar = () => {
       {
         title: addPrompt,
         allDay: true,
-        start: clickedSlot.start,
-        end: clickedSlot.end
+        start: storedClickedEvent.start,
+        end: storedClickedEvent.end
       }
     ).then(res =>
 
@@ -118,6 +122,10 @@ const ReactCalendar = () => {
 
       .catch(err => console.log(err));
     // }
+  }
+
+  const test = () => {
+console.log(inputValue)
   }
 
   return (
@@ -164,7 +172,7 @@ const ReactCalendar = () => {
         <Modal.Body>Would you like to add the event on the selected day?</Modal.Body>
         <Form>
           <Form.Label>Event Name</Form.Label>
-          <Form.Control type="text" name="myInput" placeholder="Enter event name" />
+          <Form.Control type="text" placeholder="Enter event name" />
         </Form>
         <Modal.Footer>
           <Button id="deleteButton" variant="danger" onClick={addEvent}>
