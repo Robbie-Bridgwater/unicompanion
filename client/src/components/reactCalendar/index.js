@@ -122,6 +122,7 @@ const ReactCalendar = () => {
     let seconds = '00';
     let milliseconds = '00';
     let convertedTime = new Date(`${year}-${month}-${day} ${hoursAndMinutes}:${seconds}:${milliseconds}`)
+    console.log(convertedTime)
     return convertedTime
   }
 
@@ -217,8 +218,8 @@ const ReactCalendar = () => {
       <Calendar
         localizer={localizer}
         events={events}
-        startAccessor="start"
-        endAccessor="end"
+        startAccessor="startDate"
+        endAccessor="endDate"
         style={{ height: 500 }}
         onSelectEvent={event => handleEventShow(event)}
         onSelectSlot={event => handleSlotShow(event)}
