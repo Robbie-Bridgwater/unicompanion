@@ -1,28 +1,9 @@
-#emailHelp {
-  text-align: center;
-  color: black;
-  padding: 10px;
-  text-decoration: underline;
-  /* font-family: Georgia, "Times New Roman", Times, serif; */
-}
-
-#emailHelp1 {
-  text-align: center;
-  color: black;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.form-label {
-  padding: 5px;
-}
-
-.contact-form {
+.account-card {
   display: block;
   position: relative;
 }
 
-.contact-form:after {
+.account-card:after {
   content: "";
   display: block;
   position: absolute;
@@ -34,7 +15,7 @@
   background-image: linear-gradient(to bottom right, #0cbaba, #f92a82);
 }
 
-.contact-form .form-inner {
+.account-card .card-inner {
   position: relative;
   display: block;
   background-color: #fff;
@@ -42,7 +23,7 @@
   z-index: 2;
 }
 
-.contact-form button {
+#pw-update-btn {
   display: inline-block;
   padding: 10px 15px;
   border-style: none;
@@ -61,11 +42,38 @@
   cursor: pointer;
 }
 
-.contact-form button:hover {
+#pw-update-btn:hover {
   background-position: 100% 0%;
 }
 
-.form-inner .form-group label {
+#logout-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #f92a82 50%,
+    #f92a82 50%,
+    #0cbaba
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#logout-btn:hover {
+  background-position: 100% 0%;
+}
+
+.account-header {
+  height: 60px;
+}
+
+.pw-form-group label {
   display: block;
   color: #666;
   font-size: 16px;
@@ -73,6 +81,6 @@
   transition: 0.4s;
 }
 
-.form-inner .form-group:focus-within label {
+.pw-form-group:focus-within label {
   color: #f92a82;
 }

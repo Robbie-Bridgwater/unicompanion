@@ -65,7 +65,7 @@ const Sidebar = () => {
               padding: "20px 5px",
             }}
           >
-            Sidebar Footer
+            © UniCompanion
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
