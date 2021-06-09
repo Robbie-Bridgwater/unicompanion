@@ -22,7 +22,6 @@ const ReactCalendar = () => {
   const [inputTitle, setInputTitle] = useState([]);
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
-  const [test, setTest] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
 
   // UPDATE/DELETE MODAL FUNCTIONS
@@ -45,7 +44,6 @@ const ReactCalendar = () => {
     setSlotModal(true);
     storeClickedEvent(clickedEvent)
   }
-
 
   useEffect(() => {
 
@@ -116,6 +114,7 @@ const ReactCalendar = () => {
 
   const addEvent = (event) => {
     event.preventDefault()
+
     setInputTitle(inputTitle)
 
     setInputStartTime(inputStartTime)
@@ -168,10 +167,10 @@ const ReactCalendar = () => {
           <Form.Label>Event Name</Form.Label>
           <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
           <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
-          <Form.Label>Enter event start time</Form.Label>
-          <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time"/>
-          <Form.Label>Enter event end time</Form.Label>
-          <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
+            <Form.Label>Enter event start time</Form.Label>
+            <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time" />
+            <Form.Label>Enter event end time</Form.Label>
+            <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
           <Button type="submit" id="deleteButton" variant="danger">
             Add
           </Button>
