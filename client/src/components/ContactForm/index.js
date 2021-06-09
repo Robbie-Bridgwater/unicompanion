@@ -10,14 +10,14 @@ const Contact = () => {
             <h1>Contact Us</h1>
           </div>
 
-          <div id="emailHelp1" class="form-text">
+          <div id="emailHelp1" className="form-text">
             If you have any further questions please get in touch below!
           </div>
 
           <br></br>
 
           <div className="form-group">
-            <label for="exampleFullName" className="form-label">
+            <label htmlFor="exampleFullName" className="form-label">
               Full Name:
             </label>
             <input
@@ -30,14 +30,14 @@ const Contact = () => {
         </div>
 
         <div className="form-group mb-3">
-          <label for="exampleEmail" className="form-label">
+          <label htmlFor="exampleEmail" className="form-label">
             Email Adresss:
           </label>
           <input type="text" className="form-control" id="exampleAddress" />
         </div>
 
         <div className="form-group mb-3">
-          <label for="exampleQuestion" className="form-label">
+          <label htmlFor="exampleQuestion" className="form-label">
             Question:
           </label>
           <input type="text" className="form-control" id="exampleQuestion" />
