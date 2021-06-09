@@ -17,6 +17,7 @@ router.route("/account")
 router.route("/:id")
   .get(userController.findUserById)
   .put(userController.update)
+  .post(userController.socials)
 //   .delete(userController.remove);
 
 module.exports = router;

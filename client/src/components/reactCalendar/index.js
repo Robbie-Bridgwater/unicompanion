@@ -6,20 +6,28 @@ import API from "../../utils/API";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import CalendarModal from "../CalendarModal";
 
 const localizer = momentLocalizer(moment)
 
 const ReactCalendar = () => {
+
   // CALENDAR HOOKS
   const [events, setEvents] = useState([]);
-  const [storedClickedEvent, storeClickedEvent] = useState([]);
+  const [storedClickedEvent, storeClickedEvent] = useState("");
 
   // MODAL HOOKS AND FUNCTIONS
   const [showEventModal, setEventModal] = useState(false);
   const [showSlotModal, setSlotModal] = useState(false);
+  const [showUpdateModal, setUpdateModal] = useState(false);
 
-  // Update and delete modal
+  // FORM HOOKS
+  const [inputTitle, setInputTitle] = useState([]);
+  const [inputStartTime, setInputStartTime] = useState([]);
+  const [inputEndTime, setInputEndTime] = useState([]);
+  const [switchStatus, setSwitchStatus] = useState(false);
+
+  // UPDATE/DELETE MODAL FUNCTIONS
+
   const handleEventClose = () => {
     setEventModal(false);
   }
@@ -29,7 +37,7 @@ const ReactCalendar = () => {
     storeClickedEvent(clickedEvent)
   }
 
-  // add event modal
+  // ADD EVENT MODAL FUNCTIONS
   const handleSlotClose = () => {
     setSlotModal(false);
   }
@@ -39,12 +47,22 @@ const ReactCalendar = () => {
     storeClickedEvent(clickedEvent)
   }
 
+  // UPDATE MODAL FUNCTIONS
+  const handleUpdateClose = () => {
+    setUpdateModal(false);
+  }
+
+  const handleUpdateShow = () => {
+    setUpdateModal(true);
+  }
 
   useEffect(() => {
 
     getEvents()
 
   }, []);
+
+  // ADD/DELETE/UPDATE FUNCTIONS
 
   const getEvents = () => {
     API.getEvents()
@@ -69,11 +87,11 @@ const ReactCalendar = () => {
 
   };
 
-  const updateEvent = () => {
-    // const confirm = window.confirm("Would you like to update this event?")
-    // if (confirm === true) {
+  const updateEvent = (event) => {
 
-    let updatePrompt = prompt("Please enter what you would like it updated to");
+    event.preventDefault()
+
+    setInputTitle(inputTitle)
 
     API.updateEvent(
 
@@ -82,62 +100,79 @@ const ReactCalendar = () => {
 
       {
         _id: storedClickedEvent._id, // UPDATE
-        title: updatePrompt,
-        allDay: storedClickedEvent.allDay,
+        title: inputTitle,
         start: storedClickedEvent.start,
-        end: storedClickedEvent.end
+        end: storedClickedEvent.end,
+        allDay: storedClickedEvent.allDay
       }
 
     ).then(res =>
       getEvents(),
+      handleUpdateClose(),
       handleEventClose()
 
     ).catch(err => console.log(err));
-    // }
+
   }
 
-  // Need to be able to add a specific time to event, currently allDay set to "true"
+  const inputTimeConverter = (inputTime) => {
+    let year = storedClickedEvent.start.getFullYear();
+    let month = storedClickedEvent.start.getMonth() + 1;
+    let day = storedClickedEvent.start.getDate();
+    let hoursAndMinutes = inputTime;
+    let seconds = '00';
+    let milliseconds = '00';
+    let convertedTime = new Date(`${year}-${month}-${day} ${hoursAndMinutes}:${seconds}:${milliseconds}`)
+    return convertedTime
+  }
 
-  const addEvent = (clickedSlot) => {
+  const addEvent = (event) => {
+    event.preventDefault()
 
-    // const confirm = window.confirm("Would you like to update this event?")
-    // if (confirm === true) {
+    setInputTitle(inputTitle)
 
-    let addPrompt = prompt("Please enter what you would like the event to be called.");
+    setInputStartTime(inputStartTime)
+
+    setInputEndTime(inputEndTime)
 
     API.addEvent(
       {
-        title: addPrompt,
-        allDay: true,
-        start: clickedSlot.start,
-        end: clickedSlot.end
+        title: inputTitle,
+        start: inputTimeConverter(inputStartTime),
+        end: inputTimeConverter(inputEndTime),
+        allDay: switchStatus
       }
     ).then(res =>
 
-      getEvents())
+      getEvents(),
+      setSwitchStatus(false),
+      handleSlotClose()
 
-      .catch(err => console.log(err));
-    // }
+    ).catch(err => console.log(err));
   }
 
   return (
     <>
+      {/* UPDATE MODAL */}
 
-      {/* MODAL */}
-
-      {/* =========== under development */}
-
-      {/* <CalendarModal Title="Edit Event" Body="Would you like to delete or update the selected Event?">
-      <Button id="deleteButton" variant="danger" onClick={removeEvent}>
-            Delete Event
-            </Button>
-          <Button variant="primary" onClick={updateEvent}>
-            Update Event
+      <Modal show={showUpdateModal} onHide={handleUpdateClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Enter what you would like to update the name of the event to</Modal.Body>
+        <Form onSubmit={updateEvent}>
+        <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
+          <Button type="submit" id="deleteButton" variant="primary">
+            Update
           </Button>
-      </CalendarModal> */}
+          <Button variant="danger" onClick={handleSlotClose}>
+            Cancel
+          </Button>
+        </Form>
 
-      {/* ===========  */}
+      </Modal>
 
+      {/* UPDATE/DELETE OPTION MODAL */}
 
       <Modal show={showEventModal} onHide={handleEventClose}>
         <Modal.Header closeButton>
@@ -148,32 +183,34 @@ const ReactCalendar = () => {
           <Button id="deleteButton" variant="danger" onClick={removeEvent}>
             Delete Event
             </Button>
-          <Button variant="primary" onClick={updateEvent}>
+          <Button variant="primary" onClick={handleUpdateShow}>
             Update Event
           </Button>
         </Modal.Footer>
       </Modal>
 
-      {/* ========================= */}
-
+      {/* ADD EVENT MODAL */}
 
       <Modal show={showSlotModal} onHide={handleSlotClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Event</Modal.Title>
         </Modal.Header>
         <Modal.Body>Would you like to add the event on the selected day?</Modal.Body>
-        <Form>
+        <Form onSubmit={addEvent}>
           <Form.Label>Event Name</Form.Label>
-          <Form.Control type="text" name="myInput" placeholder="Enter event name" />
-        </Form>
-        <Modal.Footer>
-          <Button id="deleteButton" variant="danger" onClick={addEvent}>
+          <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
+          <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
+          <Form.Label>Enter event start time</Form.Label>
+          <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time" />
+          <Form.Label>Enter event end time</Form.Label>
+          <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
+          <Button type="submit" id="deleteButton" variant="primary">
             Add
           </Button>
-          <Button variant="primary" onClick={handleSlotClose}>
+          <Button variant="danger" onClick={handleSlotClose}>
             Cancel
           </Button>
-        </Modal.Footer>
+        </Form>
       </Modal>
 
       {/* CALENDAR */}
@@ -187,8 +224,9 @@ const ReactCalendar = () => {
         onSelectEvent={event => handleEventShow(event)}
         onSelectSlot={event => handleSlotShow(event)}
         selectable={true}
-      // popup={true}
-      />
+        popup={true}
+        views={["month", "agenda"]}
+        />
 
     </>
   )

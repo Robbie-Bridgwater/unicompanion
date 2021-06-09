@@ -8,28 +8,29 @@ import UserAccount from "../components/UserAccount";
 import "./Account.css";
 
 const Account = () => {
-
   const [details, setDetails] = useState({ email: "", password: "" });
   const [signupDetails, setSignupDetails] = useState({ name: "", email: "", password: "" });
   const [loggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    userAPI.getSession().then(res => {
-      if(res.status === 200) {
+    userAPI.getSession().then((res) => {
+      console.log(res);
+      if (res.status === 200) {
         setIsLoggedIn(true);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   const submitHandlerLogin = (e) => {
     e.preventDefault();
-    userAPI.authenticateUser(details).then(res => {
-      if(res.status === 200) {
-        userAPI.getSession().then(res => {
-          if(res.status === 200) {
+    userAPI.authenticateUser(details).then((res) => {
+      if (res.status === 200) {
+        userAPI.getSession().then((res) => {
+          if (res.status === 200) {
             setIsLoggedIn(true);
           }
-        })
+        });
       }
     })
   };
@@ -52,11 +53,12 @@ const Account = () => {
     })
   };
 
-  if(loggedIn === true) {
+  if (loggedIn === true) {
     return (
       <UserAccount />
     )
   }
+
   return (
     <Wrapper>
       <Container>
@@ -69,6 +71,7 @@ const Account = () => {
               onChangePass={(e) => setDetails({ ...details, password: e.target.value })}
               valueEmail={details.email}
               valuePass={details.password}
+              error={error}
               />
             </div>
           </Col>

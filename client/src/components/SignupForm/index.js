@@ -1,9 +1,8 @@
 import React from "react";
 
 function SignUpForm(props) {
-
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.onSubmit} className="auth-form">
       <div className="form-inner">
         <h2>Sign Up</h2>
         <div className="form-group">
@@ -14,6 +13,7 @@ function SignUpForm(props) {
             id="name"
             onChange={props.onChangeName}
             value={props.valueName}
+            className="auth-input"
           />
         </div>
         <div className="form-group">
@@ -24,6 +24,7 @@ function SignUpForm(props) {
             id="email"
             onChange={props.onChangeEmail}
             value={props.valueEmail}
+            className="auth-input"
           />
         </div>
         <div className="form-group">
@@ -34,10 +35,11 @@ function SignUpForm(props) {
             id="password"
             onChange={props.onChangePass}
             value={props.valuePass}
+            className="auth-input"
           />
         </div>
         <br />
-        <input type="submit" value="SIGNUP" />
+        <input type="submit" value="SIGNUP" className="auth-input" />
       </div>
     </form>
   );
