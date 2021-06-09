@@ -17,6 +17,7 @@ const ReactCalendar = () => {
   // MODAL HOOKS AND FUNCTIONS
   const [showEventModal, setEventModal] = useState(false);
   const [showSlotModal, setSlotModal] = useState(false);
+  const [showUpdateModal, setUpdateModal] = useState(false);
 
   // FORM HOOKS
   const [inputTitle, setInputTitle] = useState([]);
@@ -43,6 +44,15 @@ const ReactCalendar = () => {
   const handleSlotShow = (clickedEvent) => {
     setSlotModal(true);
     storeClickedEvent(clickedEvent)
+  }
+
+  // UPDATE MODAL FUNCTIONS
+  const handleUpdateClose = () => {
+    setUpdateModal(false);
+  }
+
+  const handleUpdateShow = () => {
+    setUpdateModal(true);
   }
 
   useEffect(() => {
@@ -76,9 +86,11 @@ const ReactCalendar = () => {
 
   };
 
-  const updateEvent = () => {
+  const updateEvent = (event) => {
 
-    let updatePrompt = prompt("Please enter what you would like it updated to");
+    event.preventDefault()
+
+    setInputTitle(inputTitle)
 
     API.updateEvent(
 
@@ -87,7 +99,7 @@ const ReactCalendar = () => {
 
       {
         _id: storedClickedEvent._id, // UPDATE
-        title: updatePrompt,
+        title: inputTitle,
         allDay: storedClickedEvent.allDay,
         start: storedClickedEvent.start,
         end: storedClickedEvent.end
@@ -95,6 +107,7 @@ const ReactCalendar = () => {
 
     ).then(res =>
       getEvents(),
+      handleUpdateClose(),
       handleEventClose()
 
     ).catch(err => console.log(err));
@@ -139,7 +152,26 @@ const ReactCalendar = () => {
 
   return (
     <>
-      {/* UPDATE/DELETE MODAL */}
+      {/* UPDATE MODAL */}
+
+      <Modal show={showUpdateModal} onHide={handleUpdateClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Enter what you would like to update the name of the event to</Modal.Body>
+        <Form onSubmit={updateEvent}>
+        <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
+          <Button type="submit" id="deleteButton" variant="danger">
+            Update
+          </Button>
+          <Button variant="primary" onClick={handleSlotClose}>
+            Cancel
+          </Button>
+        </Form>
+
+      </Modal>
+
+      {/* UPDATE/DELETE OPTION MODAL */}
 
       <Modal show={showEventModal} onHide={handleEventClose}>
         <Modal.Header closeButton>
@@ -150,7 +182,7 @@ const ReactCalendar = () => {
           <Button id="deleteButton" variant="danger" onClick={removeEvent}>
             Delete Event
             </Button>
-          <Button variant="primary" onClick={updateEvent}>
+          <Button variant="primary" onClick={handleUpdateShow}>
             Update Event
           </Button>
         </Modal.Footer>
@@ -167,10 +199,10 @@ const ReactCalendar = () => {
           <Form.Label>Event Name</Form.Label>
           <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
           <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
-            <Form.Label>Enter event start time</Form.Label>
-            <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time" />
-            <Form.Label>Enter event end time</Form.Label>
-            <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
+          <Form.Label>Enter event start time</Form.Label>
+          <Form.Control onChange={event => setInputStartTime(event.target.value)} type="time" />
+          <Form.Label>Enter event end time</Form.Label>
+          <Form.Control onChange={event => setInputEndTime(event.target.value)} type="time" />
           <Button type="submit" id="deleteButton" variant="danger">
             Add
           </Button>
