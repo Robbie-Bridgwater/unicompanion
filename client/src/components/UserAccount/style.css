@@ -23,7 +23,7 @@
   z-index: 2;
 }
 
-.account-card button {
+#pw-update-btn {
   display: inline-block;
   padding: 10px 15px;
   border-style: none;
@@ -42,7 +42,30 @@
   cursor: pointer;
 }
 
-.account-card button:hover {
+#pw-update-btn:hover {
+  background-position: 100% 0%;
+}
+
+#logout-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #f92a82 50%,
+    #f92a82 50%,
+    #0cbaba
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#logout-btn:hover {
   background-position: 100% 0%;
 }
 

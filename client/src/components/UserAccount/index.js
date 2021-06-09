@@ -42,7 +42,11 @@ function UserAccount(props) {
               <div className="card-inner">
                 <div className="card-header inline account-header">
                   <span>Account Management</span>
-                  <button onClick={handleLogout} className="float-end">
+                  <button
+                    onClick={handleLogout}
+                    className="float-end"
+                    id="logout-btn"
+                  >
                     LOGOUT
                   </button>
                 </div>
@@ -81,6 +85,7 @@ function UserAccount(props) {
                     type="submit"
                     onClick={handleCurrentPassword}
                     className="mt-2"
+                    id="pw-update-btn"
                   >
                     SUBMIT
                   </button>
