@@ -1,6 +1,56 @@
 .formItem {
-    border: solid 3px black;
-    border-radius: 6px;
-    padding: 5px 10px 5px 10px;
-    margin-bottom: 5px;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+
+.formItem .checkbox {
+  margin-right: 5px;
+}
+
+.form-item-outer {
+  display: block;
+  position: relative;
+}
+
+.form-item-outer:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: 1;
+  background-image: linear-gradient(to bottom right, #0cbaba, #f92a82);
+}
+
+.form-item-outer .formItem {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+.sns-submit-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sns-submit-btn:hover {
+  background-position: 100% 0%;
 }

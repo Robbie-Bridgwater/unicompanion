@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export default {
-  createUser: function(credentials) {
+let userAPI = {
+  createUser: function (credentials) {
     return axios.post("/api/user", credentials);
   },
 
@@ -13,11 +13,11 @@ export default {
     return axios.post("/api/user/login", credentials);
   },
 
-  getSession: function() {
+  getSession: function () {
     return axios.get("/api/user/account");
   },
-  
-  endSession: function() {
+
+  endSession: function () {
     return axios.get("/api/user/logout");
   },
 
@@ -33,3 +33,6 @@ export default {
   }
 
 };
+
+export default userAPI;
+
