@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     findUserById: function(req, res) {
@@ -29,41 +30,46 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-    authenticate: function(req, res) {
-        User.findOne({ email: req.body.email, password: req.body.password }, function(err, user) {
-            if (err) {
-                console.log(err);
-                return res.status(500).send();
-            }
-
-            if (!user) {
-                return res.status(404).send('User not found');
-            }
-
+   authenticate: function(req, res) {
+    try {
+      User.findOne({ email: req.body.email }, function(error, user) {
+        if(!user) {
+          return res.status(400).send({ message: "The username does not exist" });
+        }
+        
+        bcrypt.compare(req.body.password, user.password, (error, match) => {
+          if(match) {
             req.session.user = user;
             return res.status(200).send('Successfully logged in');
+          }
+                    
+          return res.status(400).send({ message: "The password is invalid" });
         });
 
-    },
+      });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+  },
 
-    session: function(req, res) {
-        if (!req.session.user) {
-            return res.status(401).send();
-        }
+  session: function(req, res) {
+    if (!req.session.user) {
+      return res.status(401).send();
+    }
 
-        return res.status(200).send(req.session.user);
-    },
+    return res.status(200).send(req.session.user);
+  },
 
-    logout: function(req, res) {
-        req.session.destroy();
-        return res.status(200).send('Successfully ended session');
-    },
+  logout: function(req, res) {
+    req.session.destroy();
+    return res.status(200).send('Successfully ended session');
+  },
 
-    update: function(req, res) {
-        User.findOneAndUpdate({ _id: req.params.id }, { password: req.body.password })
-            .then(dbUser => res.json(dbUser))
-            .catch(err => res.status(422).json(err));
-    },
+  update: function(req, res) {
+    User.findOneAndUpdate({ _id: req.params.id }, { password: req.body.password })
+      .then(dbUser => res.json(dbUser))
+      .catch(err => res.status(422).json(err));
+  },  
 
     socials: function(req, res) {
         console.log(req.body);
