@@ -78,26 +78,10 @@ const ReactCalendar = () => {
       .catch((err) => console.log(err));
   };
 
-  const updateEvent = (event) => {
-    event.preventDefault();
-
-    setInputTitle(inputTitle);
-
-    API.updateEvent(
-      storedClickedEvent._id, // FILTER
-      {
-        _id: storedClickedEvent._id, // UPDATE
-        title: inputTitle,
-        start: storedClickedEvent.start,
-        end: storedClickedEvent.end,
-        allDay: switchStatus,
-      }
-    )
-      .then((res) => getEvents(), handleUpdateClose(), handleEventClose())
-      .catch((err) => console.log(err));
-  };
-
   const inputTimeConverter = (inputTime) => {
+    if (typeof storedClickedEvent.start === 'string') {
+      storedClickedEvent.start = new Date(storedClickedEvent.start)
+    }
     let year = storedClickedEvent.start.getFullYear();
     let month = storedClickedEvent.start.getMonth() + 1;
     let day = storedClickedEvent.start.getDate();
@@ -108,6 +92,31 @@ const ReactCalendar = () => {
       `${year}-${month}-${day} ${hoursAndMinutes}:${seconds}:${milliseconds}`
     );
     return convertedTime;
+  };
+
+  const updateEvent = (event) => {
+    event.preventDefault();
+
+    setInputTitle(inputTitle);
+
+    setInputAssociation(inputAssociation);
+
+    setInputStartTime(inputStartTime);
+
+    setInputEndTime(inputEndTime);
+
+    API.updateEvent(
+      storedClickedEvent._id, // FILTER
+      {
+        _id: storedClickedEvent._id, // UPDATE
+        title: inputTitle,
+        start: inputTimeConverter(inputStartTime),
+        end: inputTimeConverter(inputEndTime),
+        allDay: switchStatus,
+      }
+    )
+      .then((res) => getEvents(), handleUpdateClose(), handleEventClose(), setSwitchStatus(false))
+      .catch((err) => console.log(err));
   };
 
   const addEvent = (event) => {
