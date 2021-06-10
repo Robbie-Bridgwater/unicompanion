@@ -73,9 +73,9 @@ const Account = () => {
 
   return (
     <Wrapper>
-      <Container>
+      <Container fluid>
         <Row>
-          <Col size="5">
+          <Col size="md-10 lg-6">
             <div id="account">
               <LoginForm
                 onSubmit={submitHandlerLogin}
@@ -91,7 +91,7 @@ const Account = () => {
               />
             </div>
           </Col>
-          <Col size="5">
+          <Col size="md-10 lg-6">
             <div id="account">
               <SignupForm
                 onSubmit={submitHandlerSignup}
