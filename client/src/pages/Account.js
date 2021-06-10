@@ -107,7 +107,7 @@ const Account = () => {
                     password: e.target.value,
                   })
                 }
-                valueEmail={signupDetails.name}
+                valueName={signupDetails.name}
                 valueEmail={signupDetails.email}
                 valuePass={signupDetails.password}
                 error={signupError}
