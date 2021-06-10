@@ -21,6 +21,7 @@ const ReactCalendar = () => {
 
   // FORM HOOKS
   const [inputTitle, setInputTitle] = useState([]);
+  const [inputAssociation, setInputAssociation] = useState([]);
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
@@ -113,19 +114,28 @@ const ReactCalendar = () => {
 
     setInputTitle(inputTitle);
 
-    setInputStartTime(inputStartTime);
+    setInputAssociation(inputAssociation)
+
+    setInputStartTime(inputStartTime)
 
     setInputEndTime(inputEndTime);
 
-    API.addEvent({
-      title: inputTitle,
-      start: inputTimeConverter(inputStartTime),
-      end: inputTimeConverter(inputEndTime),
-      allDay: switchStatus,
-    })
-      .then((res) => getEvents(), setSwitchStatus(false), handleSlotClose())
-      .catch((err) => console.log(err));
-  };
+    API.addEvent(
+      {
+        title: inputTitle,
+        start: inputTimeConverter(inputStartTime),
+        end: inputTimeConverter(inputEndTime),
+        allDay: switchStatus,
+        association: inputAssociation
+      }
+    ).then(res =>
+
+      getEvents(),
+      setSwitchStatus(false),
+      handleSlotClose()
+
+    ).catch(err => console.log(err));
+  }
 
   return (
     <>
@@ -183,17 +193,20 @@ const ReactCalendar = () => {
         </Modal.Body>
         <Form onSubmit={addEvent}>
           <Form.Label>Event Name</Form.Label>
-          <Form.Control
-            onChange={(event) => setInputTitle(event.target.value)}
-            type="text"
-            placeholder="Enter event name"
-          />
-          <Form.Check
-            onClick={() => setSwitchStatus(!switchStatus)}
-            type="switch"
-            id="custom-switch"
-            label="Is this an all day event"
-          />
+          <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
+          <Form.Label>Which association is this event for</Form.Label>
+          <Form.Control onChange={event => setInputAssociation(event.target.value)} as="select">
+            <option disabled="disabled" >Select association</option>
+            <option>Football</option>
+            <option>Hockey</option>
+            <option>Rugby</option>
+            <option>Lacrosee</option>
+            <option>Film</option>
+            <option>Dance</option>
+            <option>Music</option>
+            <option>Drinking</option>
+          </Form.Control>
+          <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
           <Form.Label>Enter event start time</Form.Label>
           <Form.Control
             onChange={(event) => setInputStartTime(event.target.value)}
