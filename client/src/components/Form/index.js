@@ -39,7 +39,6 @@ export const Form = () => {
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
-      console.log(res);
       setDetails(res.data);
     });
   }, []);
@@ -92,8 +91,6 @@ export const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(isSports);
-    console.log(isSocieties);
 
     // Convert object to an array of the keys
     const sportKeys = Object.keys(isSports);
@@ -114,14 +111,10 @@ export const Form = () => {
     });
     // Convert the final array into a string
     let sportString = sport.join(", ");
-    console.log(sportString);
     let societyString = society.join(", ");
-    console.log(societyString);
 
     const id = details._id;
-    console.log(sportString, societyString, id);
 
-    // console.log(details);
     details.sport = sportString;
     details.society = societyString;
 
