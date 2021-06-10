@@ -62,38 +62,36 @@ const ReactCalendar = () => {
   };
 
   useEffect(() => {
-    getEvents();
-  }, []);
+    if (details.name.length > 0) {
+      getEvents(details);
+    }
+  }, [details.name]);
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
-      console.log(res);
       userAPI.getUser(res.data._id).then((payload) => {
         setDetails(payload.data);
       });
     });
   }, []);
 
-  let sportArr = details.sport;
-  let societyArr = details.society;
-
-  console.log(sportArr);
-  console.log(societyArr);
-
-  const football = "Football"
-
-  const filterEvents = (data) => {
-    const newArr = data.filter(event => event.association === football)
-    console.log(newArr)
-    setEvents(data)
-  }
-
   // ADD/DELETE/UPDATE FUNCTIONS
 
-  const getEvents = () => {
+  const getEvents = (details) => {
     API.getEvents()
 
-      .then((res) => filterEvents(res.data))
+      .then((res) => {
+        const sports = res.data.filter((event) =>
+          details.sport.find((association) => association === event.association)
+        );
+        const societies = res.data.filter((event) =>
+          details.society.find(
+            (association) => association === event.association
+          )
+        );
+        const events = [...sports, ...societies];
+        setEvents(events);
+      })
 
       .catch((err) => console.log(err));
   };
