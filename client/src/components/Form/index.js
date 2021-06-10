@@ -4,6 +4,7 @@ import FormItem from "../FormItem";
 import { sports, societies } from "../FormData";
 import userAPI from "../../utils/userAPI";
 import "./style.css";
+import Modal from "react-bootstrap/Modal";
 
 export const Form = () => {
   // Managing state for which sports team they belong to
@@ -32,6 +33,9 @@ export const Form = () => {
   );
 
   const [details, setDetails] = useState({ id: "", sport: "", society: "" });
+
+  const [showSuccessModal, setSuccessModal] = useState(false);
+  const [showErrorModal, setErrorModal] = useState(false);
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
@@ -122,10 +126,39 @@ export const Form = () => {
     details.society = societyString;
 
     userAPI.addSocials(id, sportString, societyString);
+
+    if (sport.length === 0 && society.length === 0) {
+      setErrorModal(true);
+    } else {
+      setSuccessModal(true);
+    }
+  };
+
+  const handleSubmitClose = () => {
+    setSuccessModal(false);
+    setErrorModal(false);
   };
 
   return (
     <li className="list-group-item">
+      <Modal show={showSuccessModal} onHide={handleSubmitClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          You are now signed up to the selected sports and/or societies.
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showErrorModal} onHide={handleSubmitClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Please select at least one sport or society to sign up to.
+        </Modal.Body>
+      </Modal>
+
       <Container fluid>
         <Row>
           <form onSubmit={handleSubmit}>
