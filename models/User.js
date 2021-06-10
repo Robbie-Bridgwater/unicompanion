@@ -23,6 +23,8 @@ const UserSchema = new Schema({
     min: [6, "Must be at least 6 characters!"],
   },
   is_SuperUser: {
+    // if email = a specific email then superuser is true
+    // need a way to add an event to calendar
     type: Boolean,
     required: false,
   },
@@ -52,6 +54,10 @@ UserSchema.pre("save", function (next) {
     next();
   });
 });
+
+UserSchema.pre('findOneAndUpdate', function () {
+  this._update.password = bcrypt.hashSync(this._update.password, 10)
+})
 
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   console.log("here!");
