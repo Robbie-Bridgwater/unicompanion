@@ -22,6 +22,7 @@ const ReactCalendar = () => {
 
   // FORM HOOKS
   const [inputTitle, setInputTitle] = useState([]);
+  const [inputAssociation, setInputAssociation] = useState([]);
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
@@ -114,6 +115,8 @@ const ReactCalendar = () => {
 
     setInputTitle(inputTitle);
 
+    setInputAssociation(inputAssociation);
+
     setInputStartTime(inputStartTime);
 
     setInputEndTime(inputEndTime);
@@ -123,6 +126,7 @@ const ReactCalendar = () => {
       start: inputTimeConverter(inputStartTime),
       end: inputTimeConverter(inputEndTime),
       allDay: switchStatus,
+      association: inputAssociation,
     })
       .then((res) => getEvents(), setSwitchStatus(false), handleSlotClose())
       .catch((err) => console.log(err));
@@ -193,6 +197,23 @@ const ReactCalendar = () => {
             type="text"
             placeholder="Enter event name"
           />
+          <Form.Label>Which association is this event for</Form.Label>
+          <Form.Control
+            onChange={(event) => setInputAssociation(event.target.value)}
+            as="select"
+          >
+            <option disabled="disabled" selected>
+              Select association
+            </option>
+            <option>Football</option>
+            <option>Hockey</option>
+            <option>Rugby</option>
+            <option>Lacrosee</option>
+            <option>Film</option>
+            <option>Dance</option>
+            <option>Music</option>
+            <option>Drinking</option>
+          </Form.Control>
           <Form.Check
             onClick={() => setSwitchStatus(!switchStatus)}
             type="switch"
