@@ -1,9 +1,11 @@
-.account-card {
+.account-card,
+.sns-account-card {
   display: block;
   position: relative;
 }
 
-.account-card:after {
+.account-card:after,
+.sns-account-card:after {
   content: "";
   display: block;
   position: absolute;
@@ -15,7 +17,8 @@
   background-image: linear-gradient(to bottom right, #0cbaba, #f92a82);
 }
 
-.account-card .card-inner {
+.account-card .card-inner,
+.sns-account-card .card-inner {
   position: relative;
   display: block;
   background-color: #fff;

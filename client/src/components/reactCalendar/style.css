@@ -1,0 +1,56 @@
+.add-event-btn,
+.update-event-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-event-btn:hover,
+.update-event-btn:hover {
+  background-position: 100% 0%;
+}
+
+.delete-event-btn,
+.cancel-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #f92a82 50%,
+    #f92a82 50%,
+    #0cbaba
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.delete-event-btn:hover,
+.cancel-btn:hover {
+  background-position: 100% 0%;
+}
+
+.add-event-btn,
+.update-event-btn,
+.delete-event-btn,
+.cancel-btn {
+  margin-right: 5px !important;
+}

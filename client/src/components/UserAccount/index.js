@@ -97,19 +97,21 @@ function UserAccount(props) {
           </Col>
 
           <Col size="10">
-            <div className="card border-drk mt-5 mb-3 w-50 mw-50">
-              <div className="card-header inline">
-                <span>Sports & Societies</span>
-              </div>
-              <div className="card-body text-dark">
-                <p className="card-text">
-                  <strong>Sports: </strong>
-                  {details.sport}
-                </p>
-                <p className="card-text">
-                  <strong>Societies: </strong>
-                  {details.society}
-                </p>
+            <div className="card sns-account-card mt-5 mb-3 w-50 mw-50">
+              <div className="card-inner">
+                <div className="card-header inline">
+                  <span>Sports & Societies</span>
+                </div>
+                <div className="card-body text-dark">
+                  <p className="card-text">
+                    <strong>Sports: </strong>
+                    {details.sport}
+                  </p>
+                  <p className="card-text">
+                    <strong>Societies: </strong>
+                    {details.society}
+                  </p>
+                </div>
               </div>
             </div>
           </Col>
