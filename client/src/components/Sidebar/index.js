@@ -63,9 +63,10 @@ const Sidebar = () => {
           <div
             style={{
               padding: "20px 5px",
+              fontSize: "13px",
             }}
           >
-            © UniCompanion
+            © Uni<br></br>Companion
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>

@@ -16,6 +16,7 @@ const Account = () => {
   });
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState("");
+  const [signupError, setSignupError] = useState("");
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
@@ -28,32 +29,42 @@ const Account = () => {
 
   const submitHandlerLogin = (e) => {
     e.preventDefault();
-    userAPI.authenticateUser(details).then((res) => {
-      if (res.status === 200) {
-        userAPI.getSession().then((res) => {
-          if (res.status === 200) {
-            setIsLoggedIn(true);
-          }
-        });
-      }
-    });
-  };
-
-  const submitHandlerSignup = (e) => {
-    e.preventDefault();
-    userAPI.createUser(signupDetails).then((res) => {
-      setDetails(res.data);
-      userAPI.authenticateUser(signupDetails).then((res) => {
+    userAPI.authenticateUser(details).then(
+      (res) => {
         if (res.status === 200) {
           userAPI.getSession().then((res) => {
             if (res.status === 200) {
               setIsLoggedIn(true);
-              setDetails(signupDetails);
             }
           });
         }
-      });
-    });
+      },
+      () => {
+        setError("Incorrect email or password");
+      }
+    );
+  };
+
+  const submitHandlerSignup = (e) => {
+    e.preventDefault();
+    userAPI.createUser(signupDetails).then(
+      (res) => {
+        setDetails(res.data);
+        userAPI.authenticateUser(signupDetails).then((res) => {
+          if (res.status === 200) {
+            userAPI.getSession().then((res) => {
+              if (res.status === 200) {
+                setIsLoggedIn(true);
+                setDetails(signupDetails);
+              }
+            });
+          }
+        });
+      },
+      () => {
+        setSignupError("Please fill in your details above");
+      }
+    );
   };
 
   if (loggedIn === true) {
@@ -62,9 +73,9 @@ const Account = () => {
 
   return (
     <Wrapper>
-      <Container>
+      <Container fluid>
         <Row>
-          <Col size="5">
+          <Col size="md-10 lg-6">
             <div id="account">
               <LoginForm
                 onSubmit={submitHandlerLogin}
@@ -80,7 +91,7 @@ const Account = () => {
               />
             </div>
           </Col>
-          <Col size="5">
+          <Col size="md-10 lg-6">
             <div id="account">
               <SignupForm
                 onSubmit={submitHandlerSignup}
@@ -96,9 +107,10 @@ const Account = () => {
                     password: e.target.value,
                   })
                 }
-                valueEmail={signupDetails.name}
+                valueName={signupDetails.name}
                 valueEmail={signupDetails.email}
                 valuePass={signupDetails.password}
+                error={signupError}
               />
             </div>
           </Col>

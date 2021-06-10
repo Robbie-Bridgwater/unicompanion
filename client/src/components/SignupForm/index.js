@@ -38,6 +38,7 @@ function SignUpForm(props) {
             className="auth-input"
           />
         </div>
+        {props.error !== "" ? <div className="error">{props.error}</div> : ""}
         <br />
         <input type="submit" value="SIGNUP" className="auth-input" />
       </div>

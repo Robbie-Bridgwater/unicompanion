@@ -27,16 +27,16 @@ const UserSchema = new Schema({
     required: false,
   },
   sport: {
-    type: String,
+    type: Array,
     // enum: ['Football', 'Rugby', 'Lacrosse', 'Hockey'],
     required: false,
-    default: "",
+    default: [],
   },
   society: {
-    type: String,
+    type: Array,
     // enum: ['Film', 'Dance', 'Music', 'Drinking'],
     required: false,
-    default: "",
+    default: [],
   },
 });
 
