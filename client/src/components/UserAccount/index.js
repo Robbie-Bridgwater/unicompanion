@@ -10,7 +10,6 @@ function UserAccount(props) {
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
-      console.log(res);
       userAPI.getUser(res.data._id).then((payload) => {
         setDetails(payload.data);
       });
@@ -20,13 +19,12 @@ function UserAccount(props) {
   const currentPass = useRef();
   const newPass = useRef();
 
-  const handleCurrentPassword = (e) => {
+  const handlePasswordUpdate = (e) => {
     e.preventDefault();
-    currentPass.current.value = "";
-    const pass = newPass.current.value;
     const id = details._id;
-    console.log(pass, id);
-    userAPI.updatePassword({ id, pass });
+    const pass = newPass.current.value;
+    userAPI.updatePassword(id, pass);
+    currentPass.current.value = "";
     newPass.current.value = "";
   };
 
@@ -66,17 +64,17 @@ function UserAccount(props) {
                   <p className="card-text">
                     <strong>Email Address: {details.email}</strong>
                   </p>
-                  <h6>Update Password:</h6>
-                  <div className="mt-4 mb-3 pw-form-group">
-                    <label className="form-label">Current Password:</label>
+                  <strong>Update Password: </strong>
+                  <div className="mt-3 mb-3 pw-form-group">
+                    <label className="ps-0 form-label">Current Password:</label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control"
                       ref={currentPass}
                     />
                   </div>
                   <div className="mt-4 mb-3 pw-form-group">
-                    <label className="form-label">New Password:</label>
+                    <label className="ps-0 form-label">New Password:</label>
                     <input
                       type="password"
                       className="form-control"
@@ -85,7 +83,7 @@ function UserAccount(props) {
                   </div>
                   <button
                     type="submit"
-                    onClick={handleCurrentPassword}
+                    onClick={handlePasswordUpdate}
                     className="mt-2"
                     id="pw-update-btn"
                   >
