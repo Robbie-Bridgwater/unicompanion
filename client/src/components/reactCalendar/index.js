@@ -61,12 +61,20 @@ const ReactCalendar = () => {
     getEvents();
   }, []);
 
+  const football = "Football"
+
+  const filterEvents = (data) => {
+    const newArr = data.filter(event => event.association === football)
+    console.log(newArr)
+    setEvents(data)
+  }
+
   // ADD/DELETE/UPDATE FUNCTIONS
 
   const getEvents = () => {
     API.getEvents()
 
-      .then((res) => setEvents(res.data))
+      .then((res) => filterEvents(res.data))
 
       .catch((err) => console.log(err));
   };
