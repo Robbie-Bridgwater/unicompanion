@@ -114,17 +114,12 @@ const ReactCalendar = () => {
 
     setInputTitle(inputTitle);
 
-<<<<<<< HEAD
     setInputAssociation(inputAssociation)
 
     setInputStartTime(inputStartTime)
-=======
-    setInputStartTime(inputStartTime);
->>>>>>> 1fcd598afc7ee9df55ec1311e53b4a330d4597d2
 
     setInputEndTime(inputEndTime);
 
-<<<<<<< HEAD
     API.addEvent(
       {
         title: inputTitle,
@@ -141,17 +136,6 @@ const ReactCalendar = () => {
 
     ).catch(err => console.log(err));
   }
-=======
-    API.addEvent({
-      title: inputTitle,
-      start: inputTimeConverter(inputStartTime),
-      end: inputTimeConverter(inputEndTime),
-      allDay: switchStatus,
-    })
-      .then((res) => getEvents(), setSwitchStatus(false), handleSlotClose())
-      .catch((err) => console.log(err));
-  };
->>>>>>> 1fcd598afc7ee9df55ec1311e53b4a330d4597d2
 
   return (
     <>
@@ -209,7 +193,6 @@ const ReactCalendar = () => {
         </Modal.Body>
         <Form onSubmit={addEvent}>
           <Form.Label>Event Name</Form.Label>
-<<<<<<< HEAD
           <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
           <Form.Label>Which association is this event for</Form.Label>
           <Form.Control onChange={event => setInputAssociation(event.target.value)} as="select">
@@ -224,19 +207,6 @@ const ReactCalendar = () => {
             <option>Drinking</option>
           </Form.Control>
           <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
-=======
-          <Form.Control
-            onChange={(event) => setInputTitle(event.target.value)}
-            type="text"
-            placeholder="Enter event name"
-          />
-          <Form.Check
-            onClick={() => setSwitchStatus(!switchStatus)}
-            type="switch"
-            id="custom-switch"
-            label="Is this an all day event"
-          />
->>>>>>> 1fcd598afc7ee9df55ec1311e53b4a330d4597d2
           <Form.Label>Enter event start time</Form.Label>
           <Form.Control
             onChange={(event) => setInputStartTime(event.target.value)}
