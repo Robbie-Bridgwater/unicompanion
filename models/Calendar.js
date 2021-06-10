@@ -17,6 +17,10 @@ const CalendarSchema = new Schema({
     end: {
         type: Date,
         required: true
+    },
+    association: {
+        type: String,
+        required: true
     }
 });
 

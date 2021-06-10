@@ -6,35 +6,37 @@ const validator = require("validator");
 SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: { 
-    type: String, 
-    required: true, 
-    unique: true,
-    validate: {
-      validator: validator.isEmail,
-      message: '{VALUE} is not a valid email',
-      isAsync: false,
-      require_bham: true
-    }
-  },
-  password: { 
-    type: String, 
-    required: true 
-  },
-  sport: {
-    type: String,
-    enum: ['football', 'rugby', 'lacrosse', 'badminton', 'tennis'],
-    required : false 
-  },
-  society: {
-    type: String,
-    enum: ['film', 'chess', 'music'],
-    required : false 
-  }
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: {
+            validator: validator.isEmail,
+            message: '{VALUE} is not a valid email',
+            isAsync: false,
+            require_bham: true
+        }
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    sport: {
+        type: Array,
+        // enum: ['Football', 'Rugby', 'Lacrosse', 'Hockey'],
+        required: false,
+        default: [],
+    },
+    society: {
+        type: Array,
+        // enum: ['Film', 'Dance', 'Music', 'Drinking'],
+        required: false,
+        default: [],
+    },
 });
 
 // UserSchema.pre('save', function(next) {
