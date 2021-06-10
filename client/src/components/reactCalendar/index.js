@@ -196,7 +196,7 @@ const ReactCalendar = () => {
           <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
           <Form.Label>Which association is this event for</Form.Label>
           <Form.Control onChange={event => setInputAssociation(event.target.value)} as="select">
-            <option disabled="disabled" >Select association</option>
+            <option disabled="disabled" selected>Select association</option>
             <option>Football</option>
             <option>Hockey</option>
             <option>Rugby</option>
