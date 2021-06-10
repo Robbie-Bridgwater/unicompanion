@@ -1,15 +1,13 @@
 import React from "react";
-import Wrapper from "../components/Wrapper"
-import ReactCalendar from "../components/reactCalendar/index"
+import Wrapper from "../components/Wrapper";
+import ReactCalendar from "../components/reactCalendar/index";
 
 const CalendarPage = () => {
-    return (
-        <Wrapper>
+  return (
+    <Wrapper>
+      <ReactCalendar></ReactCalendar>
+    </Wrapper>
+  );
+};
 
-            <ReactCalendar></ReactCalendar>
-
-        </Wrapper>
-    )
-}
-
-export default CalendarPage
+export default CalendarPage;

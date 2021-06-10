@@ -9,8 +9,14 @@ import "./Account.css";
 
 const Account = () => {
   const [details, setDetails] = useState({ email: "", password: "" });
+  const [signupDetails, setSignupDetails] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState("");
+  const [signupError, setSignupError] = useState("");
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
@@ -21,26 +27,48 @@ const Account = () => {
     });
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandlerLogin = (e) => {
     e.preventDefault();
-    userAPI.authenticateUser(details).then((res) => {
-      if (res.status === 200) {
-        userAPI.getSession().then((res) => {
+    userAPI.authenticateUser(details).then(
+      (res) => {
+        if (res.status === 200) {
+          userAPI.getSession().then((res) => {
+            if (res.status === 200) {
+              setIsLoggedIn(true);
+            }
+          });
+        }
+      },
+      () => {
+        setError("Incorrect email or password");
+      }
+    );
+  };
+
+  const submitHandlerSignup = (e) => {
+    e.preventDefault();
+    userAPI.createUser(signupDetails).then(
+      (res) => {
+        setDetails(res.data);
+        userAPI.authenticateUser(signupDetails).then((res) => {
           if (res.status === 200) {
-            setIsLoggedIn(true);
+            userAPI.getSession().then((res) => {
+              if (res.status === 200) {
+                setIsLoggedIn(true);
+                setDetails(signupDetails);
+              }
+            });
           }
         });
+      },
+      () => {
+        setSignupError("Please fill in your details above");
       }
-    });
-    setDetails({ email: "", password: "" });
+    );
   };
 
   if (loggedIn === true) {
-    return (
-      <div>
-        <UserAccount />
-      </div>
-    );
+    return <UserAccount />;
   }
 
   return (
@@ -50,7 +78,7 @@ const Account = () => {
           <Col size="5">
             <div id="account">
               <LoginForm
-                onSubmit={submitHandler}
+                onSubmit={submitHandlerLogin}
                 onChangeEmail={(e) =>
                   setDetails({ ...details, email: e.target.value })
                 }
@@ -65,7 +93,25 @@ const Account = () => {
           </Col>
           <Col size="5">
             <div id="account">
-              <SignupForm />
+              <SignupForm
+                onSubmit={submitHandlerSignup}
+                onChangeName={(e) =>
+                  setSignupDetails({ ...signupDetails, name: e.target.value })
+                }
+                onChangeEmail={(e) =>
+                  setSignupDetails({ ...signupDetails, email: e.target.value })
+                }
+                onChangePass={(e) =>
+                  setSignupDetails({
+                    ...signupDetails,
+                    password: e.target.value,
+                  })
+                }
+                valueEmail={signupDetails.name}
+                valueEmail={signupDetails.email}
+                valuePass={signupDetails.password}
+                error={signupError}
+              />
             </div>
           </Col>
         </Row>

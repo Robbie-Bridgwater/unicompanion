@@ -5,16 +5,20 @@ export function Container({ fluid, children }) {
 }
 
 export function Row({ fluid, children, myclass }) {
-  return <div className={`row${fluid ? "-fluid" : ""} ${myclass}`}>{children}</div>;
+  return (
+    <div className={`row${fluid ? "-fluid" : ""} ${myclass}`}>{children}</div>
+  );
 }
 
 export function Col({ size, children, myclass }) {
   return (
     <div
-      className={size
-        .split(" ")
-        .map(size => "col-" + size)
-        .join(" ") + ` ${myclass}`}
+      className={
+        size
+          .split(" ")
+          .map((size) => "col-" + size)
+          .join(" ") + ` ${myclass}`
+      }
     >
       {children}
     </div>
