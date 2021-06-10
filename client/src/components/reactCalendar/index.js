@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -26,6 +27,9 @@ const ReactCalendar = () => {
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
+
+  // USER HOOKS
+  const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   // UPDATE/DELETE MODAL FUNCTIONS
 
@@ -58,15 +62,36 @@ const ReactCalendar = () => {
   };
 
   useEffect(() => {
-    getEvents();
+    if (details.name.length > 0) {
+      getEvents(details);
+    }
+  }, [details.name]);
+
+  useEffect(() => {
+    userAPI.getSession().then((res) => {
+      userAPI.getUser(res.data._id).then((payload) => {
+        setDetails(payload.data);
+      });
+    });
   }, []);
 
   // ADD/DELETE/UPDATE FUNCTIONS
 
-  const getEvents = () => {
+  const getEvents = (details) => {
     API.getEvents()
 
-      .then((res) => setEvents(res.data))
+      .then((res) => {
+        const sports = res.data.filter((event) =>
+          details.sport.find((association) => association === event.association)
+        );
+        const societies = res.data.filter((event) =>
+          details.society.find(
+            (association) => association === event.association
+          )
+        );
+        const events = [...sports, ...societies];
+        setEvents(events);
+      })
 
       .catch((err) => console.log(err));
   };

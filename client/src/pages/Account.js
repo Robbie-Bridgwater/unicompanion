@@ -20,7 +20,6 @@ const Account = () => {
 
   useEffect(() => {
     userAPI.getSession().then((res) => {
-      console.log(res);
       if (res.status === 200) {
         setIsLoggedIn(true);
       }
