@@ -90,7 +90,7 @@ const ReactCalendar = () => {
         title: inputTitle,
         start: storedClickedEvent.start,
         end: storedClickedEvent.end,
-        allDay: storedClickedEvent.allDay,
+        allDay: switchStatus,
       }
     )
       .then((res) => getEvents(), handleUpdateClose(), handleEventClose())
@@ -140,7 +140,7 @@ const ReactCalendar = () => {
         <Modal.Header closeButton>
           <Modal.Title>Update Event</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        {/* <Modal.Body>
           Enter what you would like to update the name of the event to
         </Modal.Body>
         <Form onSubmit={updateEvent}>
@@ -148,11 +148,41 @@ const ReactCalendar = () => {
             onChange={(event) => setInputTitle(event.target.value)}
             type="text"
             placeholder="Enter event name"
+          /> */}
+
+        <Modal.Body>
+          Would you like to add the event on the selected day?
+        </Modal.Body>
+        <Form onSubmit={updateEvent}>
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control onChange={event => setInputTitle(event.target.value)} type="text" placeholder="Enter event name" />
+          <Form.Label>Which association is this event for</Form.Label>
+          <Form.Control onChange={event => setInputAssociation(event.target.value)} as="select">
+            <option disabled="disabled" selected>Select association</option>
+            <option>Football</option>
+            <option>Hockey</option>
+            <option>Rugby</option>
+            <option>Lacrosee</option>
+            <option>Film</option>
+            <option>Dance</option>
+            <option>Music</option>
+            <option>Drinking</option>
+          </Form.Control>
+          <Form.Check onClick={() => setSwitchStatus(!switchStatus)} type="switch" id="custom-switch" label="Is this an all day event" />
+          <Form.Label>Enter event start time</Form.Label>
+          <Form.Control
+            onChange={(event) => setInputStartTime(event.target.value)}
+            type="time"
           />
-          <button type="submit" className="update-event-btn">
+          <Form.Label>Enter event end time</Form.Label>
+          <Form.Control
+            onChange={(event) => setInputEndTime(event.target.value)}
+            type="time"
+          />
+          <button type="submit" id="deleteButton" variant="primary">
             Update
           </button>
-          <button onClick={handleSlotClose} className="cancel-btn">
+          <button variant="danger" onClick={handleUpdateClose}>
             Cancel
           </button>
         </Form>
