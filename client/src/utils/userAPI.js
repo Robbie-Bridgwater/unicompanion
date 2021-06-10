@@ -21,7 +21,7 @@ let userAPI = {
     return axios.get("/api/user/logout");
   },
 
-  updatePassword: function ({ id, pass }) {
+  updatePassword: function (id, pass) {
     return axios.put(`/api/user/${id}`, { password: pass });
   },
 
