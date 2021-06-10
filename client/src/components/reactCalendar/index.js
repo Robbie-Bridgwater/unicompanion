@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -26,6 +27,9 @@ const ReactCalendar = () => {
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
+
+  // USER HOOKS
+  const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   // UPDATE/DELETE MODAL FUNCTIONS
 
@@ -60,6 +64,21 @@ const ReactCalendar = () => {
   useEffect(() => {
     getEvents();
   }, []);
+
+  useEffect(() => {
+    userAPI.getSession().then((res) => {
+      console.log(res);
+      userAPI.getUser(res.data._id).then((payload) => {
+        setDetails(payload.data);
+      });
+    });
+  }, []);
+
+  let sportArr = details.sport;
+  let societyArr = details.society;
+
+  console.log(sportArr);
+  console.log(societyArr);
 
   const football = "Football"
 
