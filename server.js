@@ -5,6 +5,8 @@ const app = express();
 const logger = require("morgan");
 const session = require("express-session");
 
+require("dotenv").config();
+
 app.use(logger("dev"));
 
 const PORT = process.env.PORT || 3001;
@@ -15,9 +17,12 @@ app.use(express.json());
 //use sessions for tracking logins
 app.use(
   session({
-    secret: "work hard",
+    secret: process.env.EXPR_SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 1800000,
+    },
   })
 );
 
