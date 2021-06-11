@@ -3,7 +3,7 @@ import "./style.css";
 
 function AboutUs(props) {
   return (
-    <div>
+    <div className="aboutSection">
       <h1 className="Header">{props.title}</h1>
 
       <p>
