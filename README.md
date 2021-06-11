@@ -14,7 +14,11 @@
 ![screenshot](./)
 
 ## Description:
+As students, or alumni, we are aware of some of the gaps in university apps/portals when it comes to the support from their student body. Existing web apps, from our experience, are cumbersome and lacking resources, which most students would find beneficial on a day-to-day basis.
 
+We have been able to create a web app which provides a single location for students to view their course timetables, resources and university events quickly and easily. In addition, the web app will allow students to easily sign up to societies or sports teams; extracurricular activities are proven to enhance the student experience and making them more accessible will likely increase their uptake.
+
+Our main aim is to create a sense of community between all students, so no one feels alone during their time at university. 
 
 ---
 
