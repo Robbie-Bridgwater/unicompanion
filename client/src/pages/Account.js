@@ -34,6 +34,7 @@ const Account = () => {
           userAPI.getSession().then((res) => {
             if (res.status === 200) {
               setIsLoggedIn(true);
+              window.location.reload();
             }
           });
         }

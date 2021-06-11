@@ -8,7 +8,7 @@ router.use("/user", userRoutes);
 
 // For anything else, render the html page CHANGE TO BUILD ON DEPLOY
 router.use(function (req, res) {
-  res.sendFile(path.join(__dirname, "../../client/public/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
 });
 
 module.exports = router;

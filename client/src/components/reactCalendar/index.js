@@ -182,125 +182,71 @@ const ReactCalendar = () => {
   return (
     <div className="react-calendar">
       {/* UPDATE MODAL */}
+      <Modal show={showUpdateModal} onHide={handleUpdateClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Event</Modal.Title>
+        </Modal.Header>
 
-      {switchStatus === false ? (
-        <Modal show={showUpdateModal} onHide={handleUpdateClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Update Event</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>Would you like to update the selected event?</Modal.Body>
-          <Form onSubmit={updateEvent} style={{ padding: "16px" }}>
-            <Form.Label>Event Name</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputTitle(event.target.value)}
-              type="text"
-              placeholder="Enter event name"
-            />
-            <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for?
-            </Form.Label>
-            <Form.Control
-              onChange={(event) => setInputAssociation(event.target.value)}
-              as="select"
-            >
-              <option disabled="disabled" selected>
-                Select association
-              </option>
-              <option>Football</option>
-              <option>Hockey</option>
-              <option>Rugby</option>
-              <option>Lacrosee</option>
-              <option>Film</option>
-              <option>Dance</option>
-              <option>Music</option>
-              <option>Drinking</option>
-            </Form.Control>
-            <Form.Check
-              onClick={() => setSwitchStatus(!switchStatus)}
-              type="switch"
-              id="custom-switch"
-              label="Is this an all day event?"
-              style={{ marginTop: "20px", marginBottom: "20px" }}
-            />
-            <Form.Label>Enter event start time</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputStartTime(event.target.value)}
-              type="time"
-            />
-            <Form.Label>Enter event end time</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputEndTime(event.target.value)}
-              type="time"
-              style={{ marginBottom: "20px" }}
-            />
-            <button
-              type="submit"
-              id="deleteButton"
-              className="update-event-btn"
-            >
-              Update
-            </button>
-            <button onClick={handleUpdateClose} className="cancel-btn">
-              Cancel
-            </button>
-          </Form>
-        </Modal>
-      ) : (
-        <Modal show={showUpdateModal} onHide={handleUpdateClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Update Event</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Would you like to update the selected event?</Modal.Body>
-          <Form onSubmit={updateEvent} style={{ padding: "16px" }}>
-            <Form.Label>Event Name</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputTitle(event.target.value)}
-              type="text"
-              placeholder="Enter event name"
-            />
-            <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for?
-            </Form.Label>
-            <Form.Control
-              onChange={(event) => setInputAssociation(event.target.value)}
-              as="select"
-            >
-              <option disabled="disabled" selected>
-                Select association
-              </option>
-              <option>Football</option>
-              <option>Hockey</option>
-              <option>Rugby</option>
-              <option>Lacrosee</option>
-              <option>Film</option>
-              <option>Dance</option>
-              <option>Music</option>
-              <option>Drinking</option>
-            </Form.Control>
-            <Form.Check
-              onClick={() => setSwitchStatus(!switchStatus)}
-              type="switch"
-              id="custom-switch"
-              label="Is this an all day event?"
-              style={{ marginTop: "20px", marginBottom: "20px" }}
-            />
-            <button
-              type="submit"
-              id="deleteButton"
-              className="update-event-btn"
-            >
-              Update
-            </button>
-            <button onClick={handleUpdateClose} className="cancel-btn">
-              Cancel
-            </button>
-          </Form>
-        </Modal>
-      )}
-
+        <Modal.Body>Would you like to update the selected event?</Modal.Body>
+        <Form onSubmit={updateEvent} style={{ padding: "16px" }}>
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control
+            onChange={(event) => setInputTitle(event.target.value)}
+            type="text"
+            placeholder="Enter event name"
+          />
+          <Form.Label style={{ marginTop: "20px" }}>
+            Which association is this event for?
+          </Form.Label>
+          <Form.Control
+            onChange={(event) => setInputAssociation(event.target.value)}
+            as="select"
+          >
+            <option disabled="disabled" selected>
+              Select association
+            </option>
+            <option>Football</option>
+            <option>Hockey</option>
+            <option>Rugby</option>
+            <option>Lacrosee</option>
+            <option>Film</option>
+            <option>Dance</option>
+            <option>Music</option>
+            <option>Drinking</option>
+          </Form.Control>
+          <Form.Check
+            onClick={() => setSwitchStatus(!switchStatus)}
+            type="switch"
+            id="custom-switch"
+            label="Is this an all day event?"
+            style={{ marginTop: "20px", marginBottom: "20px" }}
+          />
+          {!switchStatus ? (
+            <>
+              <Form.Label>Enter event start time</Form.Label>
+              <Form.Control
+                onChange={(event) => setInputStartTime(event.target.value)}
+                type="time"
+              />
+              <Form.Label>Enter event end time</Form.Label>
+              <Form.Control
+                onChange={(event) => setInputEndTime(event.target.value)}
+                type="time"
+                style={{ marginBottom: "20px" }}
+              />{" "}
+            </>
+          ) : (
+            <></>
+          )}
+          <button type="submit" id="deleteButton" className="update-event-btn">
+            Update
+          </button>
+          <button onClick={handleUpdateClose} className="cancel-btn">
+            Cancel
+          </button>
+        </Form>
+      </Modal>
       {/* UPDATE/DELETE OPTION MODAL */}
-
       <Modal show={showEventModal} onHide={handleEventClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Event</Modal.Title>
@@ -321,119 +267,72 @@ const ReactCalendar = () => {
           </button>
         </Modal.Footer>
       </Modal>
-
       {/* ADD EVENT MODAL */}
-
-      {switchStatus === false ? (
-        <Modal show={showSlotModal} onHide={handleSlotClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Event</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Would you like to add the event on the selected day?
-          </Modal.Body>
-          <Form onSubmit={addEvent} style={{ padding: "16px" }}>
-            <Form.Label>Event Name</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputTitle(event.target.value)}
-              type="text"
-              placeholder="Enter event name"
-            />
-            <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for?
-            </Form.Label>
-            <Form.Control
-              onChange={(event) => setInputAssociation(event.target.value)}
-              as="select"
-            >
-              <option disabled="disabled" selected>
-                Select association
-              </option>
-              <option>Football</option>
-              <option>Hockey</option>
-              <option>Rugby</option>
-              <option>Lacrosee</option>
-              <option>Film</option>
-              <option>Dance</option>
-              <option>Music</option>
-              <option>Drinking</option>
-            </Form.Control>
-            <Form.Check
-              onClick={() => setSwitchStatus(!switchStatus)}
-              type="switch"
-              id="custom-switch"
-              label="Is this an all day event?"
-              style={{ marginTop: "20px", marginBottom: "20px" }}
-            />
-            <Form.Label>Enter event start time</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputStartTime(event.target.value)}
-              type="time"
-            />
-            <Form.Label>Enter event end time</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputEndTime(event.target.value)}
-              type="time"
-              style={{ marginBottom: "20px" }}
-            />
-            <button type="submit" className="add-event-btn">
-              Add
-            </button>
-            <button onClick={handleSlotClose} className="cancel-btn">
-              Cancel
-            </button>
-          </Form>
-        </Modal>
-      ) : (
-        <Modal show={showSlotModal} onHide={handleSlotClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Event</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Would you like to add the event on the selected day?
-          </Modal.Body>
-          <Form onSubmit={addEvent} style={{ padding: "16px" }}>
-            <Form.Label>Event Name</Form.Label>
-            <Form.Control
-              onChange={(event) => setInputTitle(event.target.value)}
-              type="text"
-              placeholder="Enter event name"
-            />
-            <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for?
-            </Form.Label>
-            <Form.Control
-              onChange={(event) => setInputAssociation(event.target.value)}
-              as="select"
-            >
-              <option disabled="disabled" selected>
-                Select association
-              </option>
-              <option>Football</option>
-              <option>Hockey</option>
-              <option>Rugby</option>
-              <option>Lacrosee</option>
-              <option>Film</option>
-              <option>Dance</option>
-              <option>Music</option>
-              <option>Drinking</option>
-            </Form.Control>
-            <Form.Check
-              onClick={() => setSwitchStatus(!switchStatus)}
-              type="switch"
-              id="custom-switch"
-              label="Is this an all day event?"
-              style={{ marginTop: "20px", marginBottom: "20px" }}
-            />
-            <button type="submit" className="add-event-btn">
-              Add
-            </button>
-            <button onClick={handleSlotClose} className="cancel-btn">
-              Cancel
-            </button>
-          </Form>
-        </Modal>
-      )}
+      <Modal show={showSlotModal} onHide={handleSlotClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Would you like to add the event on the selected day?
+        </Modal.Body>
+        <Form onSubmit={addEvent} style={{ padding: "16px" }}>
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control
+            onChange={(event) => setInputTitle(event.target.value)}
+            type="text"
+            placeholder="Enter event name"
+          />
+          <Form.Label style={{ marginTop: "20px" }}>
+            Which association is this event for?
+          </Form.Label>
+          <Form.Control
+            onChange={(event) => setInputAssociation(event.target.value)}
+            as="select"
+          >
+            <option disabled="disabled" selected>
+              Select association
+            </option>
+            <option>Football</option>
+            <option>Hockey</option>
+            <option>Rugby</option>
+            <option>Lacrosee</option>
+            <option>Film</option>
+            <option>Dance</option>
+            <option>Music</option>
+            <option>Drinking</option>
+          </Form.Control>
+          <Form.Check
+            onClick={() => setSwitchStatus(!switchStatus)}
+            type="switch"
+            id="custom-switch"
+            label="Is this an all day event?"
+            style={{ marginTop: "20px", marginBottom: "20px" }}
+          />
+          {!switchStatus ? (
+            <>
+              <Form.Label>Enter event start time</Form.Label>
+              <Form.Control
+                onChange={(event) => setInputStartTime(event.target.value)}
+                type="time"
+              />
+              <Form.Label>Enter event end time</Form.Label>
+              <Form.Control
+                onChange={(event) => setInputEndTime(event.target.value)}
+                type="time"
+                style={{ marginBottom: "20px" }}
+              />{" "}
+            </>
+          ) : (
+            <></>
+          )}
+          <button type="submit" className="add-event-btn">
+            Add
+          </button>
+          <button onClick={handleSlotClose} className="cancel-btn">
+            Cancel
+          </button>
+        </Form>
+      </Modal>
 
       {/* CALENDAR */}
       {getSuperUserBoolean() === true ? (

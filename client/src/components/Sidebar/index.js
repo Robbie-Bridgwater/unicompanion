@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,8 +8,19 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
+import userAPI from "../../utils/userAPI";
 
 const Sidebar = () => {
+  const [loggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    userAPI.getSession().then((res) => {
+      if (res.status === 200) {
+        setIsLoggedIn(true);
+      }
+    });
+  }, []);
+
   return (
     <div
       style={{
@@ -38,18 +49,28 @@ const Sidebar = () => {
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/calendar" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="calendar">Calendar</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink
-              exact
-              to="/sportsandsocieties"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="running">
-                Sports and Societies
-              </CDBSidebarMenuItem>
-            </NavLink>
+
+            {loggedIn ? (
+              <>
+                <NavLink exact to="/calendar" activeClassName="activeClicked">
+                  <CDBSidebarMenuItem icon="calendar">
+                    Calendar
+                  </CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink
+                  exact
+                  to="/sportsandsocieties"
+                  activeClassName="activeClicked"
+                >
+                  <CDBSidebarMenuItem icon="running">
+                    Sports and Societies
+                  </CDBSidebarMenuItem>
+                </NavLink>
+              </>
+            ) : (
+              <></>
+            )}
+
             <NavLink exact to="/account" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Account</CDBSidebarMenuItem>
             </NavLink>
