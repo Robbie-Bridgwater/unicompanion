@@ -54,3 +54,23 @@
 .cancel-btn {
   margin-right: 5px !important;
 }
+
+.cal-modal {
+  padding: 10px;
+}
+
+.rbc-event {
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+}
+
+.rbc-event:hover {
+  background-position: 100% 0%;
+}
