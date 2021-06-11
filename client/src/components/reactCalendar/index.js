@@ -198,7 +198,7 @@ const ReactCalendar = () => {
               placeholder="Enter event name"
             />
             <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for
+              Which association is this event for?
             </Form.Label>
             <Form.Control
               onChange={(event) => setInputAssociation(event.target.value)}
@@ -220,7 +220,7 @@ const ReactCalendar = () => {
               onClick={() => setSwitchStatus(!switchStatus)}
               type="switch"
               id="custom-switch"
-              label="Is this an all day event"
+              label="Is this an all day event?"
               style={{ marginTop: "20px", marginBottom: "20px" }}
             />
             <Form.Label>Enter event start time</Form.Label>
@@ -260,7 +260,7 @@ const ReactCalendar = () => {
               placeholder="Enter event name"
             />
             <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for
+              Which association is this event for?
             </Form.Label>
             <Form.Control
               onChange={(event) => setInputAssociation(event.target.value)}
@@ -282,7 +282,7 @@ const ReactCalendar = () => {
               onClick={() => setSwitchStatus(!switchStatus)}
               type="switch"
               id="custom-switch"
-              label="Is this an all day event"
+              label="Is this an all day event?"
               style={{ marginTop: "20px", marginBottom: "20px" }}
             />
             <button
@@ -340,7 +340,7 @@ const ReactCalendar = () => {
               placeholder="Enter event name"
             />
             <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for
+              Which association is this event for?
             </Form.Label>
             <Form.Control
               onChange={(event) => setInputAssociation(event.target.value)}
@@ -362,7 +362,7 @@ const ReactCalendar = () => {
               onClick={() => setSwitchStatus(!switchStatus)}
               type="switch"
               id="custom-switch"
-              label="Is this an all day event"
+              label="Is this an all day event?"
               style={{ marginTop: "20px", marginBottom: "20px" }}
             />
             <Form.Label>Enter event start time</Form.Label>
@@ -400,7 +400,7 @@ const ReactCalendar = () => {
               placeholder="Enter event name"
             />
             <Form.Label style={{ marginTop: "20px" }}>
-              Which association is this event for
+              Which association is this event for?
             </Form.Label>
             <Form.Control
               onChange={(event) => setInputAssociation(event.target.value)}
@@ -422,7 +422,7 @@ const ReactCalendar = () => {
               onClick={() => setSwitchStatus(!switchStatus)}
               type="switch"
               id="custom-switch"
-              label="Is this an all day event"
+              label="Is this an all day event?"
               style={{ marginTop: "20px", marginBottom: "20px" }}
             />
             <button type="submit" className="add-event-btn">
