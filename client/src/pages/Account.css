@@ -100,3 +100,22 @@
 .auth-form .form-inner input[type="submit"]:hover {
   background-position: 100% 0%;
 }
+
+.form-error {
+  font-size: 12px;
+  color: red;
+  display: block;
+}
+
+i:hover {
+  color: #0cbaba;
+  cursor: pointer;
+}
+
+.pass-show {
+  float: left;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-right: 7px;
+}
