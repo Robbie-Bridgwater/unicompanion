@@ -20,9 +20,10 @@
 .contact-form {
   display: block;
   position: relative;
+  margin: 25px 15px 15px 15px;
 }
 
-.contact-form:after {
+/* .contact-form:after {
   content: "";
   display: block;
   position: absolute;
@@ -32,7 +33,7 @@
   bottom: -5px;
   z-index: 1;
   background-image: linear-gradient(to bottom right, #0cbaba, #f92a82);
-}
+} */
 
 .contact-form .form-inner {
   position: relative;
@@ -40,6 +41,7 @@
   background-color: #fff;
   padding: 30px;
   z-index: 2;
+  border: 5px inset  #0cbaba;
 }
 
 .contact-form button {

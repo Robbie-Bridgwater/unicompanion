@@ -4,7 +4,7 @@ import "./style.css";
 const Contact = () => {
   return (
     <form className="contact-form">
-      <div className="border form-inner">
+      <div className="form-inner">
         <div className="fluid-mb-3">
           <div id="emailHelp" className="form-text">
             <h1>Contact Us</h1>
