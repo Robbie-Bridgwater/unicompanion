@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import API from "../../utils/API";
+import userAPI from "../../utils/userAPI";
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -26,6 +27,9 @@ const ReactCalendar = () => {
   const [inputStartTime, setInputStartTime] = useState([]);
   const [inputEndTime, setInputEndTime] = useState([]);
   const [switchStatus, setSwitchStatus] = useState(false);
+
+  // USER HOOKS
+  const [details, setDetails] = useState({ name: "", email: "", password: "" });
 
   // UPDATE/DELETE MODAL FUNCTIONS
 
@@ -58,15 +62,36 @@ const ReactCalendar = () => {
   };
 
   useEffect(() => {
-    getEvents();
+    if (details.name.length > 0) {
+      getEvents(details);
+    }
+  }, [details.name]);
+
+  useEffect(() => {
+    userAPI.getSession().then((res) => {
+      userAPI.getUser(res.data._id).then((payload) => {
+        setDetails(payload.data);
+      });
+    });
   }, []);
 
   // ADD/DELETE/UPDATE FUNCTIONS
 
-  const getEvents = () => {
+  const getEvents = (details) => {
     API.getEvents()
 
-      .then((res) => setEvents(res.data))
+      .then((res) => {
+        const sports = res.data.filter((event) =>
+          details.sport.find((association) => association === event.association)
+        );
+        const societies = res.data.filter((event) =>
+          details.society.find(
+            (association) => association === event.association
+          )
+        );
+        const events = [...sports, ...societies];
+        setEvents(events);
+      })
 
       .catch((err) => console.log(err));
   };
@@ -78,26 +103,10 @@ const ReactCalendar = () => {
       .catch((err) => console.log(err));
   };
 
-  const updateEvent = (event) => {
-    event.preventDefault();
-
-    setInputTitle(inputTitle);
-
-    API.updateEvent(
-      storedClickedEvent._id, // FILTER
-      {
-        _id: storedClickedEvent._id, // UPDATE
-        title: inputTitle,
-        start: storedClickedEvent.start,
-        end: storedClickedEvent.end,
-        allDay: switchStatus,
-      }
-    )
-      .then((res) => getEvents(), handleUpdateClose(), handleEventClose())
-      .catch((err) => console.log(err));
-  };
-
   const inputTimeConverter = (inputTime) => {
+    if (typeof storedClickedEvent.start === 'string') {
+      storedClickedEvent.start = new Date(storedClickedEvent.start)
+    }
     let year = storedClickedEvent.start.getFullYear();
     let month = storedClickedEvent.start.getMonth() + 1;
     let day = storedClickedEvent.start.getDate();
@@ -108,6 +117,31 @@ const ReactCalendar = () => {
       `${year}-${month}-${day} ${hoursAndMinutes}:${seconds}:${milliseconds}`
     );
     return convertedTime;
+  };
+
+  const updateEvent = (event) => {
+    event.preventDefault();
+
+    setInputTitle(inputTitle);
+
+    setInputAssociation(inputAssociation);
+
+    setInputStartTime(inputStartTime);
+
+    setInputEndTime(inputEndTime);
+
+    API.updateEvent(
+      storedClickedEvent._id, // FILTER
+      {
+        _id: storedClickedEvent._id, // UPDATE
+        title: inputTitle,
+        start: inputTimeConverter(inputStartTime),
+        end: inputTimeConverter(inputEndTime),
+        allDay: switchStatus,
+      }
+    )
+      .then((res) => getEvents(), handleUpdateClose(), handleEventClose(), setSwitchStatus(false))
+      .catch((err) => console.log(err));
   };
 
   const addEvent = (event) => {
