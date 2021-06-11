@@ -4,7 +4,7 @@ import "./style.css";
 function AboutUs(props) {
   return (
     <div className="aboutSection">
-      <h1 className="Header">{props.title}</h1>
+      <h1 className="Header" style={{ marginBottom: "40px" }}>{props.title}</h1>
 
       <p>
         As students, or alumni, we are aware of some of the gaps in university
