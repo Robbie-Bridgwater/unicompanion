@@ -19,6 +19,7 @@
 .auth-form {
   display: block;
   position: relative;
+  width: 80%;
 }
 
 .auth-form:after {
@@ -37,7 +38,7 @@
   position: relative;
   display: block;
   background-color: #fff;
-  padding: 30px;
+  padding: 20px;
   z-index: 2;
 }
 
@@ -50,7 +51,7 @@
 
 .auth-form .form-inner .form-group {
   display: block;
-  width: 300px;
+  width: 100%;
   margin-bottom: 15px;
 }
 

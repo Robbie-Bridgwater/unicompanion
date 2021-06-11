@@ -74,8 +74,12 @@ const Account = () => {
   return (
     <Wrapper>
       <Container fluid>
-        <Row>
-          <Col size="md-10 lg-6">
+        <Row
+               myclass="d-flex justify-content-center"
+        >
+          <Col size="xs-10 sm-10 md-10 lg-6"
+               myclass="justify-content-center"
+          >
             <div id="account">
               <LoginForm
                 onSubmit={submitHandlerLogin}
@@ -91,7 +95,9 @@ const Account = () => {
               />
             </div>
           </Col>
-          <Col size="md-10 lg-6">
+          <Col size="xs-10 sm-10 md-10 lg-6"
+               myclass="justify-content-center"
+          >
             <div id="account">
               <SignupForm
                 onSubmit={submitHandlerSignup}
