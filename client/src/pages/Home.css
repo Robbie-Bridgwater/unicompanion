@@ -1,36 +1,36 @@
 #login-signup-btn {
-    display: inline-block;
-    padding: 10px 15px;
-    border-style: none;
-    border-radius: 8px !important;
-    background-image: linear-gradient(
-      to right,
-      #0cbaba 50%,
-      #0cbaba 50%,
-      #f92a82
-    );
-    background-size: 200%;
-    background-position: 0%;
-    transition: 0.4s;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  #login-signup-btn:hover {
-    background-position: 100% 0%;
-  }
+  display: inline-block;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 8px !important;
+  background-image: linear-gradient(
+    to right,
+    #0cbaba 50%,
+    #0cbaba 50%,
+    #f92a82
+  );
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
 
-  #home-welcome {
-    text-align: center;
-    padding: 10px;
-  }
+#login-signup-btn:hover {
+  background-position: 100% 0%;
+}
 
-  #home-intro {
-    text-align: center;
-    margin-bottom: 50px;
-  }
+#home-welcome {
+  text-align: center;
+  padding: 10px;
+}
 
-  #ls-btn-div {
-    text-align: center;
-  }
+#home-intro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#ls-btn-div {
+  text-align: center;
+}
