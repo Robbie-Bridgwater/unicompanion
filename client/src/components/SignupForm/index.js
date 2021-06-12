@@ -55,7 +55,7 @@ function SignUpForm(props) {
         <div className="form-group">
           <Form.Check
             id="super-user-check"
-            onClick={props.onChangeSuperUser}
+            onChange={props.onChangeSuperUser}
             checked={props.valueSuperUser}
             type="switch"
             label="Are you a leader of a sport or society?"

@@ -85,7 +85,9 @@ const ReactCalendar = () => {
 
       .then((res) => {
         const sports = res.data.filter((event) =>
-          details.sport.find((association) => association === event.association)
+          details.sport.find(
+            (association) => association === event.association
+          )
         );
         const societies = res.data.filter((event) =>
           details.society.find(
@@ -208,7 +210,7 @@ const ReactCalendar = () => {
             <option>Football</option>
             <option>Hockey</option>
             <option>Rugby</option>
-            <option>Lacrosee</option>
+            <option>Lacrosse</option>
             <option>Film</option>
             <option>Dance</option>
             <option>Music</option>
@@ -295,7 +297,7 @@ const ReactCalendar = () => {
             <option>Football</option>
             <option>Hockey</option>
             <option>Rugby</option>
-            <option>Lacrosee</option>
+            <option>Lacrosse</option>
             <option>Film</option>
             <option>Dance</option>
             <option>Music</option>

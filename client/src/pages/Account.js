@@ -55,7 +55,6 @@ const Account = () => {
           if (res.status === 200) {
             userAPI.getSession().then((res) => {
               if (res.status === 200) {
-                console.log(signupDetails);
                 setIsLoggedIn(true);
                 window.location.reload();
                 setDetails(signupDetails);
