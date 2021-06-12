@@ -23,9 +23,6 @@ function UserAccount(props) {
   const newPass = useRef();
   const confNewPass = useRef();
 
-  console.log(details.sport);
-  console.log(details.society);
-
   const handlePasswordUpdate = (e) => {
     e.preventDefault();
     const id = details._id;
