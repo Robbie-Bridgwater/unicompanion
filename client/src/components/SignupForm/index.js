@@ -51,18 +51,19 @@ function SignUpForm(props) {
           <i className="pass-show" onClick={togglePasswordVisiblity}>
             {eye}
           </i>
-          <div className="form-group">
-            <Form.Check
-              id="super-user-check"
-              onClick={props.onChangeSuperUser}
-              checked={props.valueSuperUser}
-              type="switch"
-              label="Are you a leader of a sport or society?"
-              style={{ marginTop: "50px" }}
-            />
-          </div>
-          <br />
         </div>
+        <div className="form-group">
+          <Form.Check
+            id="super-user-check"
+            onClick={props.onChangeSuperUser}
+            checked={props.valueSuperUser}
+            type="switch"
+            label="Are you a leader of a sport or society?"
+            style={{ marginTop: "50px" }}
+          />
+        </div>
+        <br />
+
         {props.error !== "" ? (
           <div className="form-error error">{props.error}</div>
         ) : (
