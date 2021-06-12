@@ -1,4 +1,4 @@
-# Workout-Tracker
+# UniCompanion
 
 A web application that universities can give to their students. It would allow the students to sign up to any sports teams and societies they wish and have access to a calendar. This calendar displays the events for their selected teams and societies.
 If you are a sports captain or society leader, you also have admin access and can add, update and remove events from the calendar.
