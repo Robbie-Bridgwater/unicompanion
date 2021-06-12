@@ -45,23 +45,23 @@ Application in action --->
 
 - Homepage
 
-![image](public/img/screenshot1.png)
+![image](client/src/assets/img/homepage.png)
 
 - Calendar Page
 
-![image](public/img/screenshot2.png)
+![image](client/src/assets/img/calendar_page.png)
 
 - Sports and Societies Page
 
-![image](public/img/screenshot3.png)
+![image](client/src/assets/img/sns_page.png)
 
 - Account Page
 
-![image](public/img/screenshot3.png)
+![image](client/src/assets/img/account_page.png)
 
 - About Us Page
 
-![image](public/img/screenshot3.png)
+![image](client/src/assets/img/about_page.png)
 
 ## License
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
