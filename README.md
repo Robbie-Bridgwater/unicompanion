@@ -15,7 +15,7 @@ Section | Description
 [Questions](#Questions?) | Where you can reach me
 
 ## Deployment
-OPEN UniCompanion ---> [HERE](https://unicompanion.herokuapp.com/)
+OPEN "UniCompanion" ---> [HERE](https://unicompanion.herokuapp.com/)
 
 ## Technologies
 
