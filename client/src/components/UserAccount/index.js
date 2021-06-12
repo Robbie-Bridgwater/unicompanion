@@ -16,7 +16,6 @@ function UserAccount(props) {
     userAPI.getSession().then((res) => {
       userAPI.getUser(res.data._id).then((payload) => {
         setDetails(payload.data);
-        console.log(payload.data);
       });
     });
   }, []);

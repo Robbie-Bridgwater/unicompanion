@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   findUserById: function (req, res) {
-    console.log(req.params.id);
-    console.log(req.session.user._id);
     if (req.params.id === req.session.user._id) {
       User.findById(req.params.id)
         .then((dbUser) => res.json(dbUser))
@@ -72,8 +70,6 @@ module.exports = {
   },
 
   socials: function (req, res) {
-    console.log(req.body);
-    console.log("here");
     User.findOneAndUpdate(
       { _id: req.params.id },
       { sport: req.body.sport, society: req.body.society }

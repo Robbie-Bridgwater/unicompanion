@@ -26,8 +26,6 @@ let userAPI = {
   },
 
   addSocials: function (id, sports, societies) {
-    console.log(sports);
-    console.log(societies);
 
     return axios.post(`/api/user/${id}`, { sport: sports, society: societies });
   },

@@ -110,15 +110,17 @@ export const Form = () => {
       }
     });
     // Convert the final array into a string
-    let sportString = sport.join(", ");
-    let societyString = society.join(", ");
+    // let sportString = sport.join(", ");
+    // let societyString = society.join(", ");
 
     const id = details._id;
 
-    details.sport = sportString;
-    details.society = societyString;
+    // details.sport = sportString;
+    // details.society = societyString;
+    details.society = society;
+    details.sport = sport;
 
-    userAPI.addSocials(id, sportString, societyString);
+    userAPI.addSocials(id, sport, society);
 
     if (sport.length === 0 && society.length === 0) {
       setErrorModal(true);
