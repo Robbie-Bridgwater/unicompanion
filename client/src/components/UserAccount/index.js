@@ -7,7 +7,7 @@ import "./style.css";
 import Modal from "react-bootstrap/Modal";
 
 function UserAccount(props) {
-  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [details, setDetails] = useState({ name: "", email: "", password: "", sport: [], society: [] });
 
   const [showSuccessModal, setSuccessModal] = useState(false);
   const [showErrorModal, setErrorModal] = useState(false);
@@ -22,6 +22,9 @@ function UserAccount(props) {
 
   const newPass = useRef();
   const confNewPass = useRef();
+
+  console.log(details.sport);
+  console.log(details.society);
 
   const handlePasswordUpdate = (e) => {
     e.preventDefault();
@@ -131,11 +134,11 @@ function UserAccount(props) {
               <div className="card-body text-dark">
                 <p className="card-text">
                   <strong>Sports: </strong>
-                  {details.sport}
+                  {details.sport.join(", ")}
                 </p>
                 <p className="card-text">
                   <strong>Societies: </strong>
-                  {details.society}
+                  {details.society.join(", ")}
                 </p>
               </div>
             </div>
