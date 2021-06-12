@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Form from "react-bootstrap/Form";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 function SignUpForm(props) {
-
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisiblity = () => {
@@ -47,11 +47,27 @@ function SignUpForm(props) {
             value={props.valuePass}
             className="auth-input"
           />
-        <span className="pass-show">Show Password</span>
-        <i className="pass-show" onClick={togglePasswordVisiblity}>{eye}</i>
-        <br/>
+          <span className="pass-show">Show Password</span>
+          <i className="pass-show" onClick={togglePasswordVisiblity}>
+            {eye}
+          </i>
+          <div className="form-group">
+            <Form.Check
+              id="super-user-check"
+              onClick={props.onChangeSuperUser}
+              checked={props.valueSuperUser}
+              type="switch"
+              label="Are you a leader of a sport or society?"
+              style={{ marginTop: "50px" }}
+            />
+          </div>
+          <br />
         </div>
-        {props.error !== "" ? <div className="form-error error">{props.error}</div> : ""}
+        {props.error !== "" ? (
+          <div className="form-error error">{props.error}</div>
+        ) : (
+          ""
+        )}
         <br />
         <input type="submit" value="SIGNUP" className="auth-input" />
       </div>

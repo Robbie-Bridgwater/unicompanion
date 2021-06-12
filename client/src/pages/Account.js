@@ -13,6 +13,7 @@ const Account = () => {
     name: "",
     email: "",
     password: "",
+    is_SuperUser: false,
   });
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState("");
@@ -54,6 +55,7 @@ const Account = () => {
           if (res.status === 200) {
             userAPI.getSession().then((res) => {
               if (res.status === 200) {
+                console.log(signupDetails);
                 setIsLoggedIn(true);
                 window.location.reload();
                 setDetails(signupDetails);
@@ -75,12 +77,8 @@ const Account = () => {
   return (
     <Wrapper>
       <Container fluid>
-        <Row
-               myclass="d-flex justify-content-center"
-        >
-          <Col size="xs-10 sm-10 md-10 lg-6"
-               myclass="justify-content-center"
-          >
+        <Row myclass="d-flex justify-content-center">
+          <Col size="xs-10 sm-10 md-10 lg-6" myclass="justify-content-center">
             <div id="account">
               <LoginForm
                 onSubmit={submitHandlerLogin}
@@ -96,9 +94,7 @@ const Account = () => {
               />
             </div>
           </Col>
-          <Col size="xs-10 sm-10 md-10 lg-6"
-               myclass="justify-content-center"
-          >
+          <Col size="xs-10 sm-10 md-10 lg-6" myclass="justify-content-center">
             <div id="account">
               <SignupForm
                 onSubmit={submitHandlerSignup}
@@ -114,9 +110,16 @@ const Account = () => {
                     password: e.target.value,
                   })
                 }
+                onChangeSuperUser={(e) =>
+                  setSignupDetails({
+                    ...signupDetails,
+                    is_SuperUser: e.target.checked,
+                  })
+                }
                 valueName={signupDetails.name}
                 valueEmail={signupDetails.email}
                 valuePass={signupDetails.password}
+                valueSuperUser={signupDetails.is_SuperUser}
                 error={signupError}
               />
             </div>
