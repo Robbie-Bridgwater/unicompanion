@@ -55,9 +55,11 @@ UserSchema.pre("save", function (next) {
   });
 });
 
-// UserSchema.pre('findOneAndUpdate', function () {
-//   this._update.password = bcrypt.hashSync(this._update.password, 10)
-// })
+UserSchema.pre('findOneAndUpdate', function () {
+  if (this._update.password) {
+    this._update.password = bcrypt.hashSync(this._update.password, 10)
+  }
+});
 
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   console.log("here!");
